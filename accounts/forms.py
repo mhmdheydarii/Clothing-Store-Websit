@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth import forms as auth_form
+from django.contrib.auth.forms import AuthenticationForm, UsernameField
 from django.core.exceptions import ValidationError
 from .models import User
 
@@ -42,10 +42,29 @@ class RegisterForm(forms.ModelForm):
         return user
 
         
-class CustomLoginForm(auth_form.AuthenticationForm):
+class CustomLoginForm(AuthenticationForm):
+
+    username = UsernameField(widget=forms.TextInput(attrs={"autofocus": True}), error_messages={
+            "required": "لطفاً ایمیل خود را وارد کنید."
+        })
+    password = forms.CharField(
+        label=("Password"),
+        strip=False,
+        widget=forms.PasswordInput(attrs={"autocomplete": "current-password"}),
+        error_messages={
+            "required": "لطفاً رمز عبور خود را وارد کنید."
+        }
+    )
 
     def confirm_login_allowed(self, user):
         super(CustomLoginForm, self).confirm_login_allowed(user)
 
         if not user.is_active:
             raise ValidationError("user is not active")
+        
+    error_messages = {
+        "invalid_login": (
+            "ایمیل یا رمز عبور اشتباه است لطفا به درستی وارد  کنید"
+        ),
+        "inactive": ("حساب کاربری مسدود شده است"),
+    }

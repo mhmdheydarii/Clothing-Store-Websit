@@ -20,13 +20,13 @@
       <span class="logo-mark">پ</span>
       <span class="logo-text">پیراهن‌کده</span>
     </a>
-    {% include 'messages.html' %}
-    <nav class="main-nav" id="main-nav">
-      <a href="{% url 'website:index' %}" class="nav-link active-link">خانه</a>
+    
+    <nav class="main-nav" >
+      <a class="nav-link {% if request.resolver_match.view_name == 'website:index' %} active-link {% endif %}" href="{% url 'website:index' %}">خانه</a>
       <a href="products.html" class="nav-link">پیراهن‌ها</a>
       <a href="blog.html" class="nav-link">وبلاگ</a>
-      <a href="{% url 'website:about' %}" class="nav-link">درباره ما</a>
-      <a href="{% url 'website:contact' %}" class="nav-link">تماس</a>
+      <a class="nav-link {% if request.resolver_match.view_name == 'website:about' %} active-link {% endif %}" href="{% url 'website:about' %}">درباره ما</a>
+      <a class="nav-link {% if request.resolver_match.view_name == 'website:contact' %} active-link {% endif %}" href="{% url 'website:contact' %}">تماس</a>
     </nav>
 
     <div class="header-actions">
@@ -60,7 +60,6 @@
       </button>
     </div>
   </div>
-
   <div class="search-bar" id="search-bar">
     <div class="container">
       <input type="text" id="search-input" placeholder="جستجوی پیراهن... مثلاً «راه‌راه آبی»">
@@ -68,6 +67,7 @@
     </div>
   </div>
 </header>
+{% include 'messages.html' %}
 {% block content %}
 
 {% endblock %}
