@@ -652,7 +652,7 @@
       const pass = form.querySelector("[name=password]").value;
       const errEl = document.getElementById("register-error");
       if(!name || !email || pass.length<4){
-        errEl.textContent = "لطفاً همهٔ فیلدها را به‌درستی پر کنید (رمز حداقل ۴ کاراکتر).";
+        errEl.textContent = "لطفاً همهٔ فیلدها را به‌درستی پر کنید (رمز حداقل 8 کاراکتر).";
         errEl.classList.add("show");
         return;
       }

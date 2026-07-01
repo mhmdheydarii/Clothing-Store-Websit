@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="auth-section">
+  <div class="container">
+    <div class="auth-card">
+      <h1>ورود به حساب</h1>
+      <p class="sub">برای پیگیری سفارش‌ها وارد حساب کاربری‌تان شوید.</p>
+      <form action="{% url 'accounts:login' %}" method="post">
+        {% csrf_token %}
+        <div class="form-field"><label>ایمیل</label><input type="email" name="username"  placeholder="[email protected]"></div>
+        <div class="form-field"><label>رمز عبور</label><input type="password" name="password"  placeholder="••••••••"></div>
+        <p class="form-error" id="login-error"></p>
+        <button type="submit" class="btn btn-primary btn-block">ورود</button>
+      </form>
+      <p class="auth-foot">حساب کاربری ندارید؟ <a href="register.html">ثبت‌نام کنید</a></p>
+    </div>
+  </div>
+</section>
+{% endblock %}

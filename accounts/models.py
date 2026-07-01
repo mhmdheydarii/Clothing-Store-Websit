@@ -62,17 +62,11 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="user_profile")
-    first_name = models.CharField(max_length=255)
-    last_name = models.CharField(max_length=255)
+    fullname = models.CharField(max_length=255)
     phone_number = models.CharField(max_length=12, validators=[validate_iranian_cellphone_number] ,null=True, blank=True)
     image = models.ImageField(upload_to="Profile/users", default="Profile/default/images.jpg", null=True, blank=True)
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
-
-    def get_fullname(self):
-        if self.first_name or self.last_name:
-            return self.first_name + " " + self.last_name
-        return "کاربر جدید"
     
     def __str__(self):
         return self.user.email
