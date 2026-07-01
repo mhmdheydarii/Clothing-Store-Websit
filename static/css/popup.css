@@ -1,0 +1,118 @@
+.popup-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.35);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    z-index: 9999;
+    animation: fadeIn .2s ease;
+}
+
+.popup {
+    position: relative;
+    max-width: 340px;
+    background: #fff;
+    border-radius: 14px;
+    padding: 18px;
+    box-shadow: 0 10px 35px rgba(0,0,0,.18);
+    animation: popupIn .25s ease;
+}
+
+.popup-close {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    border: none;
+    background: transparent;
+    font-size: 22px;
+    color: #999;
+    cursor: pointer;
+}
+
+.popup-close:hover {
+    color: #333;
+}
+
+.alert {
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.alert-success {
+    background: #eefaf2;
+    color: #198754;
+}
+
+.alert-error,
+.alert-danger {
+    background: #fff2f2;
+    color: #dc3545;
+}
+
+.alert-warning {
+    background: #fff8e6;
+    color: #b7791f;
+}
+
+.alert-info {
+    background: #eef7ff;
+    color: #0d6efd;
+}
+
+.popup h3 {
+    margin: 0 0 10px;
+    font-size: 16px;
+}
+
+.popup ul {
+    margin: 0;
+    padding-left: 18px;
+}
+
+.popup li {
+    margin-bottom: 6px;
+    font-size: 14px;
+}
+
+.popup a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.popup a:hover {
+    text-decoration: underline;
+}
+
+@keyframes popupIn {
+    from {
+        opacity: 0;
+        transform: scale(.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@media (max-width: 480px) {
+    .popup {
+        max-width: 100%;
+        padding: 16px;
+        border-radius: 12px;
+    }
+
+    .alert,
+    .popup li {
+        font-size: 13px;
+    }
+}

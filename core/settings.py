@@ -27,8 +27,7 @@ SECRET_KEY = config("SECRET_KEY", default="test")
 DEBUG = config("DEBUG", cast=bool, default=True)
 
 ALLOWED_HOSTS = config(
-    "ALLOWED_HOSTS", cast=lambda v: [item.strip() for item in v.split(",")], default="*"
-)
+    "ALLOWED_HOSTS", cast=lambda v: [item.strip() for item in v.split(",")], default="*")
 
 
 # Application definition
@@ -42,8 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # apps
-    'accounts',
     'website',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -122,9 +121,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
-STATIC_ROOT = 'static/'
+STATIC_ROOT = 'staticfiles'
+
 STATICFILES_DIRS = [
-    BASE_DIR / 'staticfiles'
+    BASE_DIR / 'static'
 ]
 
 MEDIA_URL = 'media/'

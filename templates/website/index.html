@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="hero">
+  <div class="container hero-inner">
+    <div class="hero-text">
+      <span class="eyebrow">مجموعهٔ بهار و تابستان ۱۴۰۴</span>
+      <h1 class="hero-title">پیراهنی که<br>به تنش <span>می‌نشینی</span></h1>
+      <p class="hero-desc">پارچهٔ ۱۰۰٪ نخ پنبه، دوخت دست‌دوز یقه و آستین، و الگوهایی که برای بدن ایرانی طراحی شده‌اند. هر پیراهن، حاصل بیش از دوازده ساعت کار خیاطی است.</p>
+      <div class="hero-actions">
+        <a href="products.html" class="btn btn-primary">دیدن پیراهن‌ها</a>
+        <a href="{% url 'website:about' %}" class="btn btn-ghost">داستان ما</a>
+      </div>
+      <div class="hero-stats">
+        <div><strong>۱۲+</strong><span>ساعت دوخت دستی</span></div>
+        <div><strong>۴۸</strong><span>ساعت ارسال به سراسر کشور</span></div>
+        <div><strong>۷</strong><span>روز ضمانت بازگشت</span></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-card">
+        <img src="https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?q=80&w=900&auto=format&fit=crop" alt="پیراهن مردانه سفید روی چوب‌رخت" loading="eager">
+      </div>
+      <div class="hero-tag"><span>دوخت ویژه</span></div>
+    </div>
+  </div>
+  <div class="tape-divider" aria-hidden="true">
+    <svg viewBox="0 0 1200 60" preserveAspectRatio="none" class="tape-svg">
+      <rect x="0" y="0" width="1200" height="60"></rect>
+      <g class="tape-ticks"></g>
+    </svg>
+  </div>
+</section>
+
+<section class="trust-strip">
+  <div class="container trust-grid">
+    <div class="trust-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3l7 3v6c0 5-3.5 7.5-7 9-3.5-1.5-7-4-7-9V6l7-3z"/></svg>
+      <h3>پارچهٔ اصل</h3><p>تأمین مستقیم از کارخانه‌های منتخب نساجی</p>
+    </div>
+    <div class="trust-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="7" width="13" height="10" rx="1.5"/><path d="M16 10h3l2 2.5V17h-5"/><circle cx="7.5" cy="18.5" r="1.5"/><circle cx="17.5" cy="18.5" r="1.5"/></svg>
+      <h3>ارسال سریع</h3><p>تحویل به سراسر ایران، حداکثر ۴۸ ساعت</p>
+    </div>
+    <div class="trust-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>
+      <h3>هفت روز بازگشت</h3><p>اگر اندازه یا حس پارچه دلت رو نبرد، برمی‌گردونیم</p>
+    </div>
+    <div class="trust-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-4.5-9.5-9C0.7 8 2 4 6 4c2 0 3.5 1.2 4.5 2.5C11.5 5.2 13 4 15 4c4 0 5.3 4 3.5 8C16 16.5 12 21 12 21z"/></svg>
+      <h3>ساخته‌شده با دقت</h3><p>هر پیراهن قبل از بسته‌بندی، بازرسی دستی می‌شود</p>
+    </div>
+  </div>
+</section>
+
+<section class="products-section" id="products">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">مجموعهٔ این فصل</span>
+      <h2>پیراهن‌های منتخب</h2>
+      <p>از کلاسیک تا اسپرت، هر کدام با الگوی اختصاصی دوخته شده‌اند.</p>
+    </div>
+    <div class="product-grid" id="featured-grid"></div>
+    <div style="text-align:center;margin-top:40px;">
+      <a href="products.html" class="btn btn-dark">مشاهدهٔ همهٔ پیراهن‌ها</a>
+    </div>
+  </div>
+</section>
+
+<section class="lookbook" id="lookbook">
+  <div class="lookbook-img">
+    <img src="https://images.unsplash.com/photo-1596755094514-f87e34085b2c?q=80&w=1200&auto=format&fit=crop" alt="مرد با پیراهن کتان مشکی" loading="lazy">
+  </div>
+  <div class="lookbook-text">
+    <span class="eyebrow">مجموعهٔ کتان</span>
+    <h2>برای روزهای گرم،<br>سبک و خوش‌دوخت</h2>
+    <p>کتان طبیعی، نفس‌کش و خوش‌افت؛ مناسب سفر، کار و عصرهای تابستانی.</p>
+    <a href="products.html?filter=linen" class="btn btn-dark">مشاهدهٔ مجموعهٔ کتان</a>
+  </div>
+</section>
+
+<section class="blog-section">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">وبلاگ پیراهن‌کده</span>
+      <h2>راهنمای خرید و نگهداری</h2>
+      <p>هر چه باید درباره سایز، انتخاب و نگهداری پیراهن بدانید.</p>
+    </div>
+    <div class="blog-grid" id="blog-teaser-grid"></div>
+    <div style="text-align:center;margin-top:40px;">
+      <a href="blog.html" class="btn btn-dark">مشاهدهٔ همهٔ مقالات</a>
+    </div>
+  </div>
+</section>
+
+<section class="newsletter">
+  <div class="container newsletter-inner">
+    <div><h2>زودتر از همه باخبر شو</h2><p>از مجموعه‌های جدید و تخفیف‌های ویژه، با خبر شو.</p></div>
+    <form action="{% url 'website:newsletter' %}" method="post" class="newsletter-form">
+      {% csrf_token %}
+      <input type="email" name="email" required placeholder="ایمیل شما">
+      <button type="submit">عضویت</button>
+    </form>
+  </div>
+</section>
+{% endblock %}
+

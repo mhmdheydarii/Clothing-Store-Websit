@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="page-header">
+  <div class="container">
+    <div class="breadcrumb"><a href="index.html">خانه</a> / درباره ما</div>
+    <h1>دربارهٔ پیراهن‌کده</h1>
+    <p>از یک میز خیاطی کوچک، تا اتاق لباس شما.</p>
+  </div>
+</section>
+<section class="about-section">
+  <div class="container about-grid">
+    <div class="about-media">
+      <img src="https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?q=80&w=900&auto=format&fit=crop" alt="خیاط در حال دوخت پیراهن" loading="lazy">
+    </div>
+    <div class="about-text">
+      <span class="eyebrow">داستان ما</span>
+      <h2>پیراهنی که برای بدن ایرانی طراحی شده</h2>
+      <p>پیراهن‌کده با یک ایده شروع شد: پیراهنی که هم به تن ایرانی بنشیند، هم پارچه‌اش حرف اول و آخر را بزند. تیم ما الگوها را بومی‌سازی کرده تا یقه، کمر و آستین، دقیقاً متناسب با بدن شما باشد.</p>
+      <ul class="about-list">
+        <li>طراحی و الگوسازی داخلی</li>
+        <li>دوخت در کارگاه‌های منتخب داخلی</li>
+        <li>کنترل کیفیت تکی، نه دسته‌ای</li>
+      </ul>
+    </div>
+  </div>
+  <div class="container">
+    <div class="values-grid">
+      <div class="value-card"><h3>کیفیت بدون سازش</h3><p>هر پیراهن قبل از ارسال، توسط یک نفر بازرسی دستی می‌شود.</p></div>
+      <div class="value-card"><h3>شفافیت قیمتی</h3><p>قیمت‌ها بر اساس هزینهٔ واقعی پارچه و دوخت تعیین می‌شوند، نه رقابت ظاهری.</p></div>
+      <div class="value-card"><h3>پایداری و بازگشت</h3><p>هفت روز فرصت برای بازگشت کالا، بدون پرسش اضافه.</p></div>
+    </div>
+  </div>
+</section>
+{% endblock %}

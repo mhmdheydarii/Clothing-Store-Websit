@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="page-header">
+  <div class="container">
+    <div class="breadcrumb"><a href="index.html">خانه</a> / تماس با ما</div>
+    <h1>تماس با ما</h1>
+    <p>سؤالی دارید؟ خوشحال می‌شویم کمکتان کنیم.</p>
+  </div>
+</section>
+<section class="contact-layout container">
+  <div class="contact-info-card">
+    <div class="contact-info-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.81.3 1.6.54 2.37a2 2 0 0 1-.45 2.11L8 9.1a16 16 0 0 0 6 6l.9-1.2a2 2 0 0 1 2.11-.45c.77.24 1.56.42 2.37.54A2 2 0 0 1 22 16.92z"/></svg>
+      <div><h4>تلفن پشتیبانی</h4><p>۰۲۱-۰۰۰۰۰۰۰۰ (شنبه تا پنجشنبه، ۹ تا ۱۸)</p></div>
+    </div>
+    <div class="contact-info-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4h16v16H4z"/><path d="M22 6l-10 7L2 6"/></svg>
+      <div><h4>ایمیل</h4><p>[email protected]</p></div>
+    </div>
+    <div class="contact-info-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-4.5-7-11a7 7 0 1 1 14 0c0 6.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+      <div><h4>آدرس کارگاه</h4><p>تهران، خیابان ولیعصر، نرسیده به میدان ونک</p></div>
+    </div>
+    <div class="map-box">
+      <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=900&auto=format&fit=crop" alt="نقشهٔ موقعیت پیراهن‌کده">
+    </div>
+  </div>
+  <div class="auth-card" style="margin:0;">
+    <h1 style="font-size:22px;">فرم تماس</h1>
+    <p class="sub">پیام شما حداکثر ظرف ۲۴ ساعت پاسخ داده می‌شود.</p>
+    <form action="." method="post">
+      {% csrf_token %}
+      <div class="form-field"><label>نام و نام خانوادگی شما</label><input name="fullname" required placeholder="نام و نام خانوادگی"></div>
+      <div class="form-field"><label>ایمیل</label><input type="email" name="email" required placeholder="[email protected]"></div>
+      <div class="form-field"><label>پیام شما</label><textarea name="message" rows="4" required placeholder="پیام خود را بنویسید..."></textarea></div>
+      <button type="submit" class="btn btn-primary btn-block">ارسال پیام</button>
+    </form>
+  </div>
+</section>
+
+
+{% endblock %}
