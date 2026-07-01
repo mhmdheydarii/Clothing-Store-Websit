@@ -745,3 +745,14 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   .cart-page-row{grid-template-columns:70px 1fr;}
   .order-meta{gap:18px;}
 }
+
+.sb-nav-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.sb-nav-item svg {
+  flex-shrink: 0;
+}
