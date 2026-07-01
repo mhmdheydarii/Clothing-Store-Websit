@@ -780,3 +780,107 @@
     initNewsletter();
   });
 })();
+
+(function () {
+
+  /* ---------- Profile edit toggle ---------- */
+  const editToggle = document.getElementById('profile-edit-toggle');
+  const cancelBtn = document.getElementById('profile-cancel-btn');
+  const formActions = document.getElementById('profile-form-actions');
+  const profileForm = document.getElementById('profile-form');
+
+  if (editToggle && profileForm) {
+    const inputs = profileForm.querySelectorAll('input');
+    let originalValues = [];
+
+    function setEditable(editable) {
+      inputs.forEach((input) => (input.disabled = !editable));
+      formActions.hidden = !editable;
+      editToggle.hidden = editable;
+      if (editable) {
+        originalValues = Array.from(inputs).map((i) => i.value);
+        inputs[0] && inputs[0].focus();
+      }
+    }
+
+    editToggle.addEventListener('click', () => setEditable(true));
+
+    cancelBtn && cancelBtn.addEventListener('click', () => {
+      inputs.forEach((input, i) => (input.value = originalValues[i]));
+      setEditable(false);
+    });
+  }
+
+  /* ---------- Address add / edit modal ---------- */
+  const addBtn = document.getElementById('add-address-btn');
+  const overlay = document.getElementById('address-modal-overlay');
+  const modalTitle = document.getElementById('address-modal-title');
+  const closeBtn = document.getElementById('address-modal-close');
+  const cancelModalBtn = document.getElementById('address-modal-cancel');
+  const addressForm = document.getElementById('address-form');
+  const addressIdField = document.getElementById('address_id');
+
+  if (overlay && addressForm) {
+    const fieldMap = {
+      title: 'title',
+      receiver: 'receiver_name',
+      phone: 'phone_number',
+      province: 'province',
+      city: 'city',
+      full: 'full_address',
+      postal: 'postal_code',
+    };
+
+    function openModal(isEdit, data) {
+      overlay.classList.add('open');
+      modalTitle.textContent = isEdit ? 'ویرایش آدرس' : 'افزودن آدرس جدید';
+
+      if (isEdit && data) {
+        addressIdField.value = data.id;
+        Object.entries(fieldMap).forEach(([dataKey, fieldName]) => {
+          const el = addressForm.elements[fieldName];
+          if (el) el.value = data[dataKey] || '';
+        });
+        // Point the form at the edit endpoint if your urls.py separates add/edit
+        addressForm.action = addressForm.dataset.editAction
+          ? addressForm.dataset.editAction.replace('0', data.id)
+          : addressForm.action;
+      } else {
+        addressIdField.value = '';
+        addressForm.reset();
+      }
+    }
+
+    function closeModal() {
+      overlay.classList.remove('open');
+    }
+
+    addBtn && addBtn.addEventListener('click', () => openModal(false));
+    closeBtn && closeBtn.addEventListener('click', closeModal);
+    cancelModalBtn && cancelModalBtn.addEventListener('click', closeModal);
+
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) closeModal();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && overlay.classList.contains('open')) closeModal();
+    });
+
+    document.querySelectorAll('.edit-address-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        openModal(true, {
+          id: btn.dataset.id,
+          title: btn.dataset.title,
+          receiver: btn.dataset.receiver,
+          phone: btn.dataset.phone,
+          province: btn.dataset.province,
+          city: btn.dataset.city,
+          full: btn.dataset.full,
+          postal: btn.dataset.postal,
+        });
+      });
+    });
+  }
+
+})();

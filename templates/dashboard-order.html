@@ -1,0 +1,62 @@
+{% extends 'website/base.html' %}
+{% load static %}
+
+{% block title %}سفارش‌های من{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container dash-layout">
+
+  {% include 'dashboard/_dashboard_sidebar.html' %}
+
+  <section class="dash-main">
+    <div class="dash-header">
+      <h1>سفارش‌های من</h1>
+      <p>تاریخچه سفارش‌های پرداخت‌شده شما.</p>
+    </div>
+
+    <div class="dash-orders-list">
+      {% for order in orders %}
+      <div class="dash-card order-card">
+        <div class="order-card-top">
+          <div>
+            <span class="order-number">سفارش #{{ order.order_number }}</span>
+            <span class="order-date">{{ order.paid_at|date:"Y/m/d - H:i" }}</span>
+          </div>
+          <span class="badge {% if order.status == 'paid' %}badge-success{% endif %}">
+            {% if order.status == 'paid' %}پرداخت شده{% else %}{{ order.get_status_display }}{% endif %}
+          </span>
+        </div>
+
+        <div class="order-items-preview">
+          {% for item in order.items.all|slice:":3" %}
+            <span class="order-item-chip">{{ item.product.name }} × {{ item.quantity }}</span>
+          {% endfor %}
+          {% if order.items.count > 3 %}
+            <span class="order-item-chip more">+{{ order.items.count|add:"-3" }} مورد دیگر</span>
+          {% endif %}
+        </div>
+
+        <div class="order-card-bottom">
+          <span class="order-total">{{ order.total_price|floatformat:0 }} تومان</span>
+          <a href="{% url 'accounts:dashboard-order-detail' order.id %}" class="btn-outline">مشاهده جزئیات</a>
+        </div>
+      </div>
+      {% empty %}
+      <div class="dash-empty">
+        <p>هنوز سفارش پرداخت‌شده‌ای ثبت نکرده‌اید.</p>
+        <a href="{% url 'website:index' %}" class="btn-primary">مشاهده پیراهن‌ها</a>
+      </div>
+      {% endfor %}
+    </div>
+
+  </section>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/dashboard.js' %}" defer></script>
+{% endblock %}
