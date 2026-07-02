@@ -1,4 +1,4 @@
-{% extends 'website/base.html' %}
+{% extends 'base.html' %}
 {% load static %}
 
 
@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="{% static 'css/main.css' %}">
 <div class="container dash-layout">
 
-  {% include 'dashboard/_dashboard_sidebar.html' %}
+  {% include 'dashboard/customer/dashboard-sidebar.html' %}
 
   <section class="dash-main">
     <div class="dash-header">
@@ -43,7 +43,7 @@
                   data-postal="{{ address.postal_code }}">
             ویرایش
           </button>
-          <form method="post" action="{% url 'accounts:dashboard-address-delete' address.id %}" class="inline-form">
+          <form method="post" action="#" class="inline-form">
             {% csrf_token %}
             <button type="submit" class="btn-ghost danger" onclick="return confirm('آدرس حذف شود؟');">حذف</button>
           </form>
@@ -67,7 +67,7 @@
       <button type="button" class="modal-close-btn" id="address-modal-close" aria-label="بستن">×</button>
     </div>
 
-    <form method="post" action="{% url 'accounts:dashboard-address-add' %}" id="address-form">
+    <form method="post" action="#" id="address-form">
       {% csrf_token %}
       <input type="hidden" name="address_id" id="address_id" value="">
 
@@ -109,9 +109,6 @@
     </form>
   </div>
 </div>
-
+<script src="{% static 'js/main.js' %}" defer></script>
 {% endblock %}
 
-{% block extra_js %}
-<script src="{% static 'js/dashboard.js' %}" defer></script>
-{% endblock %}

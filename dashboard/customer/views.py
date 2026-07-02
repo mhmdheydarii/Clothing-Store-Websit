@@ -19,3 +19,9 @@ class CustomerProfileView(UserCustomerPermission, SuccessMessageMixin ,UpdateVie
     def form_invalid(self, form):
         messages.error(self.request, "مشکلی در بروزرسانی اطلاعات بوجود آمد.")
         return super().form_invalid(form)
+
+class CustomerAddressView(TemplateView):
+    template_name = "dashboard/customer/address.html"
+
+class CustomerOrderView(TemplateView):
+    template_name = "dashboard/customer/order.html"
