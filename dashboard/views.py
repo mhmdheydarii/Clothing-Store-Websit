@@ -9,10 +9,8 @@ class DashboardView(LoginRequiredMixin, View):
 
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated:
-            if request.user.type == UserType.admin.value:
-                return redirect(reverse_lazy("dashboard:admin:home"))
+            if request.user.type in (UserType.admin.value, UserType.superuser.value):
+                return redirect(reverse_lazy("dashboard:admin:profile"))
             if request.user.type == UserType.customer.value:
-                return redirect(reverse_lazy("dashboard:customer:home"))
-        else:
-            return redirect(reverse_lazy("accounts:login"))
+                return redirect(reverse_lazy("dashboard:customer:profile"))
         return super().dispatch(request, *args, **kwargs)

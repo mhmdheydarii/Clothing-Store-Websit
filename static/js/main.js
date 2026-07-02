@@ -794,7 +794,10 @@
     let originalValues = [];
 
     function setEditable(editable) {
-      inputs.forEach((input) => (input.disabled = !editable));
+      inputs.forEach((input) => {
+        if (input.id === "email") return;
+        input.disabled = !editable;
+      });
       formActions.hidden = !editable;
       editToggle.hidden = editable;
       if (editable) {
