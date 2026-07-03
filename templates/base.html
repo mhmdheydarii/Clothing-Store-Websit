@@ -28,7 +28,8 @@
       <nav class="main-nav">
         <a class="nav-link {% if request.resolver_match.view_name == 'website:index' %} active-link {% endif %}"
           href="{% url 'website:index' %}">خانه</a>
-        <a href="products.html" class="nav-link">پیراهن‌ها</a>
+        <a class="nav-link {% if request.resolver_match.view_name == 'website:about' %} active-link {% endif %}"
+         href="{% url 'shop:products' %}">پیراهن‌ها</a>
         <a href="blog.html" class="nav-link">وبلاگ</a>
         <a class="nav-link {% if request.resolver_match.view_name == 'website:about' %} active-link {% endif %}"
           href="{% url 'website:about' %}">درباره ما</a>

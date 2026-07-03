@@ -1,24 +1,22 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-<title>جزئیات محصول | پیراهن‌کده</title>
-<meta name="description" content="مشاهدهٔ جزئیات و سایزبندی محصول.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&family=Lalezar&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>نام محصول | پیراهن‌کده</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&family=Lalezar&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+<!-- HEADER -->
 <header class="site-header" id="site-header">
   <div class="container header-inner">
     <a href="index.html" class="logo">
       <span class="logo-mark">پ</span>
       <span class="logo-text">پیراهن‌کده</span>
     </a>
-
     <nav class="main-nav" id="main-nav">
       <a href="index.html" class="nav-link">خانه</a>
       <a href="products.html" class="nav-link active-link">پیراهن‌ها</a>
@@ -26,45 +24,216 @@
       <a href="about.html" class="nav-link">درباره ما</a>
       <a href="contact.html" class="nav-link">تماس</a>
     </nav>
-
     <div class="header-actions">
-      <button class="icon-btn" id="search-toggle" aria-label="جستجو">
+      <button class="icon-btn" id="search-toggle">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><line x1="20" y1="20" x2="16.5" y2="16.5"/></svg>
       </button>
-      <a href="account.html" class="icon-btn" aria-label="حساب کاربری" id="account-link">
+      <a href="account.html" class="icon-btn" id="account-link">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="3.4"/><path d="M5 20c1.2-3.8 4-5.6 7-5.6s5.8 1.8 7 5.6"/></svg>
       </a>
-      <a href="cart.html" class="icon-btn cart-btn" id="cart-toggle" aria-label="سبد خرید">
+      <a href="cart.html" class="icon-btn cart-btn">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h2l2.2 11.1a2 2 0 0 0 2 1.6h7.6a2 2 0 0 0 2-1.6L21 8H6"/><circle cx="9" cy="21" r="1.3"/><circle cx="18" cy="21" r="1.3"/></svg>
         <span class="cart-count" id="cart-count">0</span>
       </a>
-      <button class="hamburger" id="hamburger" aria-label="منو">
+      <button class="hamburger" id="hamburger">
         <span></span><span></span><span></span>
       </button>
     </div>
   </div>
-
   <div class="search-bar" id="search-bar">
     <div class="container">
-      <input type="text" id="search-input" placeholder="جستجوی پیراهن... مثلاً «راه‌راه آبی»">
+      <input type="text" id="search-input" placeholder="جستجو...">
       <button id="search-close">بستن</button>
     </div>
   </div>
 </header>
 
-
+<!-- PAGE HEADER -->
 <section class="page-header">
   <div class="container">
-    <div class="breadcrumb"><a href="index.html">خانه</a> / <a href="products.html">پیراهن‌ها</a> / جزئیات محصول</div>
-    <h1>جزئیات محصول</h1>
+    <div class="breadcrumb">
+      <a href="index.html">خانه</a> /
+      <a href="products.html">پیراهن‌ها</a> /
+      نام محصول
+    </div>
+    <h1>نام محصول</h1>
   </div>
 </section>
+
+<!-- PRODUCT DETAIL -->
 <section class="product-detail">
-  <div class="container" id="product-detail-root"></div>
+  <div class="container">
+    <div class="detail-grid">
+
+      <!-- GALLERY -->
+      <div class="gallery">
+        <div class="gallery-main">
+          <img id="gallery-main-img"
+               src="https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?q=80&w=900&auto=format&fit=crop"
+               alt="نام محصول">
+        </div>
+
+        <!-- تامبنیل‌ها — اینجا for بزن روی product.images -->
+        <div class="gallery-thumbs">
+          <img src="https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?q=80&w=200&auto=format&fit=crop"
+               class="active" data-img="https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?q=80&w=900&auto=format&fit=crop">
+          <img src="https://images.unsplash.com/photo-1603252109303-2751441dd157?q=80&w=200&auto=format&fit=crop"
+               data-img="https://images.unsplash.com/photo-1603252109303-2751441dd157?q=80&w=900&auto=format&fit=crop">
+        </div>
+      </div>
+
+      <!-- INFO -->
+      <div class="detail-info">
+
+        <span class="product-cat">کلاسیک</span>
+        <h1>نام محصول</h1>
+
+        <div class="detail-rating">
+          <span class="stars">★★★★★</span>
+          ۴.۸ از ۵ · ۳۴ نظر
+        </div>
+
+        <div class="detail-price">
+          <!-- اگه sale_price داری، قیمت اصلی رو اینجا خط بزن -->
+          <!-- <span style="text-decoration:line-through; color:#aaa; font-size:16px; font-weight:400;">۱٬۵۰۰٬۰۰۰</span> -->
+          ۱٬۲۹۰٬۰۰۰<span> تومان</span>
+        </div>
+
+        <p class="detail-desc">
+          توضیحات محصول اینجا نمایش داده می‌شود.
+        </p>
+
+        <!-- ADD TO CART FORM -->
+        <form method="post" action="">
+          <!-- csrf_token رو اینجا بذار -->
+
+          <!-- رنگ‌ها — اینجا for بزن روی product.colors -->
+          <div class="size-row">
+            <div class="size-label">انتخاب رنگ</div>
+          </div>
+          <div class="color-options" style="margin-bottom:20px;">
+            <label title="سفید">
+              <input type="radio" name="color" value="1" checked style="display:none;">
+              <span class="swatch active" style="background:#f4efe5; width:26px; height:26px;"
+                    onclick="document.querySelectorAll('.color-options .swatch').forEach(s=>s.classList.remove('active')); this.classList.add('active');">
+              </span>
+            </label>
+            <label title="سبز">
+              <input type="radio" name="color" value="2" style="display:none;">
+              <span class="swatch" style="background:#28433d; width:26px; height:26px;"
+                    onclick="document.querySelectorAll('.color-options .swatch').forEach(s=>s.classList.remove('active')); this.classList.add('active');">
+              </span>
+            </label>
+          </div>
+
+          <!-- سایزها — اینجا for بزن روی product.sizes -->
+          <div class="size-row">
+            <div class="size-label">انتخاب سایز</div>
+            <a href="blog-post.html?slug=size-guide" class="size-guide-link">راهنمای سایزبندی</a>
+          </div>
+          <div class="size-options" style="margin-bottom:22px;">
+            <button type="button" class="active"
+                    onclick="document.querySelectorAll('.size-options button').forEach(b=>b.classList.remove('active')); this.classList.add('active'); document.getElementById('size-input').value=this.dataset.size;"
+                    data-size="S">S</button>
+            <button type="button"
+                    onclick="document.querySelectorAll('.size-options button').forEach(b=>b.classList.remove('active')); this.classList.add('active'); document.getElementById('size-input').value=this.dataset.size;"
+                    data-size="M">M</button>
+            <button type="button"
+                    onclick="document.querySelectorAll('.size-options button').forEach(b=>b.classList.remove('active')); this.classList.add('active'); document.getElementById('size-input').value=this.dataset.size;"
+                    data-size="L">L</button>
+            <button type="button"
+                    onclick="document.querySelectorAll('.size-options button').forEach(b=>b.classList.remove('active')); this.classList.add('active'); document.getElementById('size-input').value=this.dataset.size;"
+                    data-size="XL">XL</button>
+            <input type="hidden" name="size" id="size-input" value="S">
+          </div>
+
+          <!-- تعداد + افزودن به سبد -->
+          <div class="qty-add-row">
+            <div class="qty-control big" style="display:flex; align-items:center; border:1.5px solid #e0d9d0; border-radius:10px; padding:0 6px;">
+              <button type="button" style="width:36px; height:42px; border-radius:8px;"
+                      onclick="const i=document.getElementById('qty-input'); if(i.value>1) i.value=parseInt(i.value)-1;">−</button>
+              <input type="number" id="qty-input" name="quantity" value="1" min="1"
+                     style="width:40px; text-align:center; border:none; background:transparent; font-family:Vazirmatn,sans-serif; font-size:15px;">
+              <button type="button" style="width:36px; height:42px; border-radius:8px;"
+                      onclick="const i=document.getElementById('qty-input'); i.value=parseInt(i.value)+1;">+</button>
+            </div>
+            <button type="submit" class="btn btn-primary" style="flex:1;">
+              افزودن به سبد خرید
+            </button>
+            <!-- اگه ناموجوده: disabled بذار روی دکمه و متنش رو عوض کن -->
+          </div>
+
+        </form>
+        <!-- /FORM -->
+
+        <div class="detail-perks">
+          <div>✓ ارسال به سراسر ایران، حداکثر ۴۸ ساعت</div>
+          <div>✓ هفت روز ضمانت بازگشت کالا</div>
+          <div>✓ پرداخت در محل برای تهران</div>
+          <!-- اگه موجودی کمه: یه div اضافه کن با رنگ قرمز -->
+        </div>
+
+      </div>
+      <!-- /INFO -->
+
+    </div>
+
+    <!-- TABS -->
+    <div class="tabs-bar">
+      <button class="tab-btn active" data-tab="desc">توضیحات</button>
+      <button class="tab-btn" data-tab="care">نگهداری</button>
+      <button class="tab-btn" data-tab="size">جدول سایز</button>
+    </div>
+
+    <div class="tab-panel active" data-panel="desc">
+      <p>توضیحات کامل محصول اینجا نمایش داده می‌شود.</p>
+    </div>
+
+    <div class="tab-panel" data-panel="care">
+      <p>نحوهٔ نگهداری محصول اینجا نمایش داده می‌شود.</p>
+    </div>
+
+    <div class="tab-panel" data-panel="size">
+      <table class="size-table">
+        <tr><th>سایز</th><th>دور یقه</th><th>دور سینه</th><th>طول آستین</th></tr>
+        <tr><td>S</td><td>۳۸-۳۹</td><td>۹۲-۹۶</td><td>۶۲</td></tr>
+        <tr><td>M</td><td>۴۰-۴۱</td><td>۹۷-۱۰۱</td><td>۶۴</td></tr>
+        <tr><td>L</td><td>۴۲-۴۳</td><td>۱۰۲-۱۰۶</td><td>۶۶</td></tr>
+        <tr><td>XL</td><td>۴۴-۴۵</td><td>۱۰۷-۱۱۲</td><td>۶۸</td></tr>
+      </table>
+    </div>
+
+    <!-- RELATED PRODUCTS — اینجا for بزن روی related_products -->
+    <h2 class="related-heading" style="margin-top:70px;">محصولات مشابه</h2>
+    <div class="product-grid">
+
+      <!-- یه کارت نمونه -->
+      <article class="product-card">
+        <div class="product-thumb">
+          <a href="product.html">
+            <img src="https://images.unsplash.com/photo-1596755094514-f87e34085b2c?q=80&w=800&auto=format&fit=crop"
+                 alt="محصول مشابه" loading="lazy">
+          </a>
+        </div>
+        <div class="product-info">
+          <span class="product-cat">کتان</span>
+          <a href="product.html" style="color:inherit;">
+            <h3 class="product-name">نام محصول مشابه</h3>
+          </a>
+          <div class="product-bottom">
+            <div class="product-price">۱٬۴۵۰٬۰۰۰<span> تومان</span></div>
+          </div>
+        </div>
+      </article>
+
+    </div>
+    <!-- /RELATED -->
+
+  </div>
 </section>
 
-
-<footer class="site-footer" id="footer">
+<!-- FOOTER -->
+<footer class="site-footer">
   <div class="container footer-grid">
     <div class="footer-brand">
       <a href="index.html" class="logo">
@@ -89,7 +258,6 @@
       <h4>ارتباط با ما</h4>
       <a href="tel:02100000000">۰۲۱-۰۰۰۰۰۰۰۰</a>
       <a href="mailto:[email protected]">[email protected]</a>
-      <a href="contact.html">فرم تماس</a>
     </div>
   </div>
   <div class="container footer-bottom">
@@ -97,12 +265,31 @@
   </div>
 </footer>
 
-<div class="cart-overlay" id="cart-overlay"></div>
 <div class="modal-overlay" id="modal-overlay"></div>
 <div class="product-modal" id="product-modal"></div>
 <div class="toast" id="toast"></div>
 
-<script src="main.js"></script>
+<script>
+// تامبنیل گالری
+document.querySelectorAll("[data-img]").forEach(img => {
+  img.addEventListener("click", () => {
+    document.getElementById("gallery-main-img").src = img.dataset.img;
+    document.querySelectorAll("[data-img]").forEach(i => i.classList.remove("active"));
+    img.classList.add("active");
+  });
+});
 
+// تب‌ها
+document.querySelectorAll(".tab-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+    document.querySelectorAll(".tab-panel").forEach(p => p.classList.remove("active"));
+    btn.classList.add("active");
+    document.querySelector(`[data-panel="${btn.dataset.tab}"]`).classList.add("active");
+  });
+});
+</script>
+
+<script src="main.js"></script>
 </body>
 </html>
