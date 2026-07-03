@@ -4,50 +4,6 @@
 (function(){
   "use strict";
 
-  /* ---------- Data: Products ---------- */
-  const PRODUCTS = [
-    {id:1,name:"پیراهن کلاسیک سفید",cat:"classic",catLabel:"کلاسیک",price:1290000,badge:"پرفروش",rating:4.8,reviews:34,
-      images:["https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?q=80&w=800&auto=format&fit=crop","https://images.unsplash.com/photo-1603252109303-2751441dd157?q=80&w=800&auto=format&fit=crop"],
-      colors:["#f4efe5","#28433d","#21201d"],
-      desc:"پیراهن کلاسیک سفید با یقهٔ فرانسوی و پارچهٔ نخ مصری. مناسب جلسات رسمی و مراسم.",
-      care:"شست‌وشو با آب سرد، خشک‌کردن در سایه، اتو با دمای متوسط."},
-    {id:2,name:"پیراهن کتان خاکی",cat:"linen",catLabel:"کتان",price:1450000,badge:null,rating:4.6,reviews:21,
-      images:["https://images.unsplash.com/photo-1596755094514-f87e34085b2c?q=80&w=800&auto=format&fit=crop"],
-      colors:["#c9a463","#28433d","#a5503b"],
-      desc:"کتان طبیعی و نفس‌کش با رنگ خاکی ملایم. انتخابی ایده‌آل برای روزهای گرم.",
-      care:"شست‌وشوی دستی یا ماشینی ملایم، عدم استفاده از سفیدکننده."},
-    {id:3,name:"پیراهن راه‌راه آبی",cat:"stripe",catLabel:"راه‌راه",price:1190000,badge:"تازه",rating:4.5,reviews:12,
-      images:["https://images.unsplash.com/photo-1620012253295-c15cc3e65df4?q=80&w=800&auto=format&fit=crop"],
-      colors:["#28433d","#21201d"],
-      desc:"راه‌راه آبی و سفید روی پارچهٔ پوپلین سبک، مناسب استفاده روزمره و اداری.",
-      care:"شست‌وشو با آب سرد و اتو ملایم."},
-    {id:4,name:"پیراهن اسپرت طوسی",cat:"casual",catLabel:"اسپرت",price:990000,badge:null,rating:4.3,reviews:18,
-      images:["https://images.unsplash.com/photo-1596755094514-f87e34085b2c?q=80&w=800&auto=format&fit=crop"],
-      colors:["#7a766d","#21201d","#a5503b"],
-      desc:"برش راحت و پارچهٔ نرم برای استایل اسپرت روزانه. مناسب با شلوار جین.",
-      care:"شست‌وشوی ماشینی ملایم با آب ولرم."},
-    {id:5,name:"پیراهن کلاسیک سرمه‌ای",cat:"classic",catLabel:"کلاسیک",price:1390000,badge:null,rating:4.7,reviews:27,
-      images:["https://images.unsplash.com/photo-1603252109303-2751441dd157?q=80&w=800&auto=format&fit=crop"],
-      colors:["#1b2e2a","#21201d"],
-      desc:"سرمه‌ای پررنگ با یقهٔ ایتالیایی، مناسب پوشیدن با کت‌وشلوار.",
-      care:"شست‌وشوی خشک پیشنهاد می‌شود."},
-    {id:6,name:"پیراهن کتان کرم",cat:"linen",catLabel:"کتان",price:1350000,badge:"تازه",rating:4.4,reviews:9,
-      images:["https://images.unsplash.com/photo-1626497764746-6dc36546b388?q=80&w=800&auto=format&fit=crop"],
-      colors:["#f4efe5","#c9a463"],
-      desc:"کرم روشن، سبک‌وزن و خوش‌افت؛ همراه خوبی برای سفرهای تابستانی.",
-      care:"شست‌وشو با دست، اجتناب از خشک‌کن."},
-    {id:7,name:"پیراهن راه‌راه قهوه‌ای",cat:"stripe",catLabel:"راه‌راه",price:1240000,badge:null,rating:4.2,reviews:15,
-      images:["https://images.unsplash.com/photo-1602810318660-d2c46b750f88?q=80&w=800&auto=format&fit=crop"],
-      colors:["#a5503b","#21201d"],
-      desc:"راه‌راه قهوه‌ای روی زمینهٔ بژ، ترکیبی گرم و امروزی برای پاییز.",
-      care:"شست‌وشو با آب سرد."},
-    {id:8,name:"پیراهن اسپرت مشکی",cat:"casual",catLabel:"اسپرت",price:1050000,badge:"پرفروش",rating:4.6,reviews:30,
-      images:["https://images.unsplash.com/photo-1596755094514-f87e34085b2c?q=80&w=800&auto=format&fit=crop"],
-      colors:["#21201d","#28433d"],
-      desc:"مشکی مات با دکمه‌های هم‌رنگ، انتخابی ساده و شیک برای هر روز.",
-      care:"شست‌وشوی وارونه برای حفظ رنگ."}
-  ];
-
   /* ---------- Data: Blog ---------- */
   const BLOG_POSTS = [
     {slug:"size-guide", tag:"راهنمای سایز", title:"چطور سایز پیراهن خودتان را دقیق پیدا کنید",
@@ -887,10 +843,3 @@
   }
 
 })();
-
-function formatPriceInToman(element) {
-    let rawPrice = parseFloat(element.innerText);
-    let formatter = new Intl.NumberFormat('fa-IR');
-    let formattedPrice = formatter.format(rawPrice);
-    element.innerText = `${formattedPrice} تومان`;
-}
