@@ -1,0 +1,72 @@
+{% load static %}
+<!-- ==================== FEATURED PRODUCTS ==================== -->
+<section class="products-section">
+    <div class="container">
+        <div class="section-head">
+            <span class="eyebrow">مجموعهٔ این فصل</span>
+            <h2>تخفیفات ویژه</h2>
+            <p>از کلاسیک تا اسپرت، هر کدام با الگوی اختصاصی دوخته شده‌اند.</p>
+        </div>
+
+        <div class="product-grid">
+
+            {% for product in discounted_products %}
+            <article class="product-card">
+                <div class="product-thumb">
+
+                    <!-- اینجا if بزن روی discount_percent -->
+                    <span class="product-badge">{{product.discount_percent}}٪ تخفیف</span>
+
+                    <a href="product-detail.html">
+                        {% with product.product_images.all as imgs %}
+                        {% for img in imgs %}
+                        {% if img.is_main %}
+                        <img src="{{img.image.url}}" alt="{{product.name}}" loading="lazy">
+                        {% endif %}
+                        {% endfor %}
+                        {% endwith %}
+                    </a>
+
+                </div>
+                <div class="product-info">
+                    <span class="product-cat">{{ product.category.name }}</span>
+                    <a href="#" style="color:inherit;">
+                        <h3 class="product-name">{{ product.name }}</h3>
+                    </a>
+                    <div class="swatches">
+                        {% for variant in product.product_variants.all %}
+                        <span class="swatch" style="background:{{ variant.color.code }}"
+                            title="{{ variant.color.name }}"></span>
+                        {% endfor %}
+                    </div>
+                    <div class="product-bottom">
+                        {% if product.discount_percent %}
+                        <del class="product-price formatted-price">
+                            {{ product.price }}
+                        </del>
+                        <div class="formatted-price product-price ">
+                            {{ product.get_price }}<span></span>
+                        </div>
+                        {% else %}
+                        <div class="formatted-price product-price">
+                            {{ product.price}}<span></span>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </article>
+            <!-- /کارت نمونه -->
+            {% empty %}
+                <p style="grid-column:1/-1; text-align:center; color:#8a8275; padding:60px 0;">
+                    محصولی پیدا نشد.
+                </p>
+            {% endfor %}
+        </div>
+
+        <!-- /product-grid -->
+
+        <div style="text-align:center; margin-top:40px;">
+            <a href="{% url 'shop:products' %}" class="btn btn-dark">مشاهدهٔ همهٔ پیراهن‌ها</a>
+        </div>
+    </div>
+</section>

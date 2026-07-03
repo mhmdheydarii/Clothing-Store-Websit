@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-
+{% load product_tags %}
 {% block content %}
 <!-- ==================== HERO ==================== -->
 <section class="hero">
@@ -65,60 +65,7 @@
 </section>
 
 
-<!-- ==================== FEATURED PRODUCTS ==================== -->
-<section class="products-section">
-  <div class="container">
-    <div class="section-head">
-      <span class="eyebrow">مجموعهٔ این فصل</span>
-      <h2>پیراهن‌های منتخب</h2>
-      <p>از کلاسیک تا اسپرت، هر کدام با الگوی اختصاصی دوخته شده‌اند.</p>
-    </div>
-
-    <!-- اینجا for بزن روی products -->
-    <div class="product-grid">
-
-      <!-- یه کارت نمونه — داخل for تکرار میشه -->
-      <article class="product-card">
-        <div class="product-thumb">
-
-          <!-- اینجا if بزن روی discount_percent -->
-          <span class="product-badge">پرفروش</span>
-
-          <a href="product-detail.html">
-            <!-- اینجا for بزن روی product_images و is_main رو چک کن -->
-            <img src="https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?q=80&w=800&auto=format&fit=crop"
-                 alt="نام محصول" loading="lazy">
-          </a>
-
-        </div>
-        <div class="product-info">
-          <span class="product-cat">نام دسته‌بندی</span>
-          <a href="product-detail.html" style="color:inherit;">
-            <h3 class="product-name">نام محصول</h3>
-          </a>
-          <div class="product-bottom">
-            <div class="product-price">
-              ۱٬۲۹۰٬۰۰۰<span> تومان</span>
-            </div>
-            <div class="swatches">
-              <!-- اینجا for بزن روی product_variants و رنگ variant.color.code رو بذار -->
-              <span class="swatch" style="background:#f4efe5;"></span>
-              <span class="swatch" style="background:#28433d;"></span>
-            </div>
-          </div>
-        </div>
-      </article>
-      <!-- /کارت نمونه -->
-
-    </div>
-    <!-- /product-grid -->
-
-    <div style="text-align:center; margin-top:40px;">
-      <a href="products.html" class="btn btn-dark">مشاهدهٔ همهٔ پیراهن‌ها</a>
-    </div>
-  </div>
-</section>
-
+{% show_discounted_products %}
 
 <!-- ==================== LOOKBOOK ==================== -->
 <section class="lookbook">
