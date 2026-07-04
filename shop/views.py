@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView
-
+from django.db.models import Prefetch
 from django.core.exceptions import FieldError
 from .models import ProductModel, ProductVariant, CategoryModel, SizeProductModel, ColorProductModel
 

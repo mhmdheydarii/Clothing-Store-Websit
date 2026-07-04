@@ -94,9 +94,9 @@
                 <h3 class="product-name">{{ object.name }}</h3>
               </a>
               <div class="swatches">
-                {% for variant in object.product_variants.all %}
-                <span class="swatch" style="background:{{ variant.color.code }}"
-                  title="{{ variant.color.name }}"></span>
+                {% for color in object.get_colors %}
+                <span class="swatch" style="background:{{ color.code }}"
+                  title="{{ color.name }}"></span>
                 {% endfor %}
               </div>
               <div class="product-bottom">

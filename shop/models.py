@@ -41,6 +41,10 @@ class ProductModel(models.Model):
         discounted_price = self.price - discount_amount
         return int(discounted_price)
 
+    def get_colors(self):
+        return ColorProductModel.objects.filter(
+            color_products__product=self
+        ).distinct()
 
 
 
