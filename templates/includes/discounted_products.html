@@ -17,7 +17,7 @@
                     <!-- اینجا if بزن روی discount_percent -->
                     <span class="product-badge">{{product.discount_percent}}٪ تخفیف</span>
 
-                    <a href="product-detail.html">
+                    <a href="{% url 'shop:product-detail' slug=product.slug %}">
                         {% with product.product_images.all as imgs %}
                         {% for img in imgs %}
                         {% if img.is_main %}
@@ -30,7 +30,7 @@
                 </div>
                 <div class="product-info">
                     <span class="product-cat">{{ product.category.name }}</span>
-                    <a href="#" style="color:inherit;">
+                    <a href="{% url 'shop:product-detail' slug=product.slug %}" style="color:inherit;">
                         <h3 class="product-name">{{ product.name }}</h3>
                     </a>
                     <div class="swatches">
