@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-
+{% load shop_tags %}
 {% block content %}
 <!-- PAGE HEADER -->
 <section class="page-header">
@@ -157,31 +157,7 @@
       </table>
     </div>
 
-    <!-- RELATED PRODUCTS — اینجا for بزن روی related_products -->
-    <h2 class="related-heading" style="margin-top:70px;">محصولات مشابه</h2>
-    <div class="product-grid">
-
-      <!-- یه کارت نمونه -->
-      <article class="product-card">
-        <div class="product-thumb">
-          <a href="product.html">
-            <img src="https://images.unsplash.com/photo-1596755094514-f87e34085b2c?q=80&w=800&auto=format&fit=crop"
-                 alt="محصول مشابه" loading="lazy">
-          </a>
-        </div>
-        <div class="product-info">
-          <span class="product-cat">کتان</span>
-          <a href="product.html" style="color:inherit;">
-            <h3 class="product-name">نام محصول مشابه</h3>
-          </a>
-          <div class="product-bottom">
-            <div class="product-price">۱٬۴۵۰٬۰۰۰<span> تومان</span></div>
-          </div>
-        </div>
-      </article>
-
-    </div>
-    <!-- /RELATED -->
+    {% show_similar_products object %}
 
   </div>
 </section>

@@ -1,0 +1,42 @@
+{% load static %}
+
+<h2 class="related-heading" style="margin-top:70px;">محصولات مشابه</h2>
+<div class="product-grid">
+
+    {% for product in similar_products %}
+    <article class="product-card">
+        <div class="product-thumb">
+            <a href="{% url 'shop:product-detail' slug=product.slug %}">
+                {% with product.product_images.all as imgs %}
+                {% for img in imgs %}
+                {% if img.is_main %}
+                <img src="{{img.image.url}}" alt="محصول مشابه" loading="lazy">
+                {% endif %}
+                {% endfor %}
+                {% endwith %}
+            </a>
+        </div>
+        <div class="product-info">
+            <span class="product-cat">{{product.category.name}}</span>
+            <a href="{% url 'shop:product-detail' slug=product.slug %}" style="color:inherit;">
+                <h3 class="product-name">{{product.name}}</h3>
+            </a>
+            <div class="product-bottom">
+                {% if product.discount_percent %}
+                <del class="product-price formatted-price">
+                    <span>{{ product.price }}</span>
+                </del>
+                <div class="formatted-price product-price ">
+                    {{ product.get_price }}
+                </div>
+                {% else %}
+                <div class="formatted-price product-price">
+                    <span>{{ product.price}}</span>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </article>
+    {% endfor %}
+</div>
+<!-- /RELATED -->
