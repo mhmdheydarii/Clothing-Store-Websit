@@ -1,7 +1,8 @@
 from django.shortcuts import render
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
+
 from django.core.exceptions import FieldError
-from .models import ProductModel, ProductVariant, CategoryModel
+from .models import ProductModel, ProductVariant, CategoryModel, SizeProductModel, ColorProductModel
 
 # Create your views here.
 
@@ -22,6 +23,16 @@ class ProductsView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["products_variant"] = ProductVariant.objects.all()
         context["categories"] = CategoryModel.objects.all()
+        return context
+    
+
+class ProductDetailView(DetailView):
+    queryset = ProductModel.objects.filter(status=True)
+    template_name = "shop/product.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["sizes"] = SizeProductModel.objects.filter(size_products__product=self.get_object()).distinct()
+        context["colors"] = ColorProductModel.objects.filter(color_products__product=self.get_object()).distinct()
         return context

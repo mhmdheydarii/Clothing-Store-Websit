@@ -7,6 +7,8 @@ from .models import (
     ImagesProductModel,
     ProductVariant
 )
+import random
+import string
 # Register your models here.
 
 @admin.register(CategoryModel)
@@ -19,6 +21,10 @@ class ProductAdmin(admin.ModelAdmin):
     list_display = ["id", "name", "price", "discount_percent", "category", "status", "created_date"]
     search_fields = ["name"]
     list_filter = ["category"]
+
+    prepopulated_fields = {"slug": ("name",)}
+
+
 
 @admin.register(SizeProductModel)
 class SizeProductAdmin(admin.ModelAdmin):

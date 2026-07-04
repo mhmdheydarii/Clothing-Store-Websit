@@ -276,7 +276,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .product-price{font-size:15px;font-weight:700;}
 .product-price span{font-size:11px;font-weight:500;color:#8a8275;margin-right:3px;}
 .swatches{display:flex;gap:5px;}
-.swatch{width:15px;height:15px;border-radius:50%;border:1.5px solid #fff;box-shadow:0 0 0 1px var(--line);}
+.swatch{display:inline-block; width:15px;height:15px;border-radius:50%;border:1.5px solid #fff;box-shadow:0 0 0 1px var(--line);}
 
 /* =========================================================
    Lookbook

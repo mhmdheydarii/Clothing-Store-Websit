@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 from decimal import Decimal
+
 # Create your models here.
 class CategoryModel(models.Model):
     name = models.CharField(max_length=255)
@@ -39,6 +40,7 @@ class ProductModel(models.Model):
         discount_amount = (self.price * Decimal(self.discount_percent)) / Decimal(100)
         discounted_price = self.price - discount_amount
         return int(discounted_price)
+
 
 
 

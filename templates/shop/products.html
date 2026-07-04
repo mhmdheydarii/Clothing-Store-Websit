@@ -57,7 +57,7 @@
             {% if request.GET.category %}
                 <input type="hidden" name="category" value="{{ request.GET.category }}">
             {% endif %}
-            <select class="sort-select" name="sort" id="sort-by-filter" onchange="this.form.submit()">
+            <select class="sort-select" name="sort" onchange="this.form.submit()">
               <option value="">مرتب‌سازی پیش‌فرض</option>
               <option value="-price">قیمت: کم به زیاد</option>
               <option value="price">قیمت: زیاد به کم</option>
@@ -77,7 +77,7 @@
               <span class="product-badge">{{ object.discount_percent }}٪ تخفیف</span>
               {% endif %}
 
-              <a href="#">
+              <a href="{% url 'shop:product-detail' slug=object.slug %}">
                 {% with object.product_images.all as imgs %}
                 {% for img in imgs %}
                 {% if img.is_main %}
@@ -90,7 +90,7 @@
             </div>
             <div class="product-info">
               <span class="product-cat">{{ object.category.name }}</span>
-              <a href="#" style="color:inherit;">
+              <a href="{% url 'shop:product-detail' slug=object.slug %}" style="color:inherit;">
                 <h3 class="product-name">{{ object.name }}</h3>
               </a>
               <div class="swatches">
@@ -102,14 +102,14 @@
               <div class="product-bottom">
                 {% if object.discount_percent %}
                 <del class="product-price formatted-price">
-                    {{ object.price }}
+                    <span>{{ object.price }}</span>
                 </del>
                 <div class="formatted-price product-price ">
-                  {{ object.get_price }}<span></span>
+                  {{ object.get_price }}
                 </div>
                 {% else %}
                 <div class="formatted-price product-price">
-                  {{ object.price}}<span></span>
+                  <span>{{ object.price}}</span>
                 </div>
                 {% endif %}
               </div>

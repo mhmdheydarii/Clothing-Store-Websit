@@ -1,62 +1,16 @@
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>نام محصول | پیراهن‌کده</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&family=Lalezar&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
+{% extends 'base.html' %}
+{% load static %}
 
-<!-- HEADER -->
-<header class="site-header" id="site-header">
-  <div class="container header-inner">
-    <a href="index.html" class="logo">
-      <span class="logo-mark">پ</span>
-      <span class="logo-text">پیراهن‌کده</span>
-    </a>
-    <nav class="main-nav" id="main-nav">
-      <a href="index.html" class="nav-link">خانه</a>
-      <a href="products.html" class="nav-link active-link">پیراهن‌ها</a>
-      <a href="blog.html" class="nav-link">وبلاگ</a>
-      <a href="about.html" class="nav-link">درباره ما</a>
-      <a href="contact.html" class="nav-link">تماس</a>
-    </nav>
-    <div class="header-actions">
-      <button class="icon-btn" id="search-toggle">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><line x1="20" y1="20" x2="16.5" y2="16.5"/></svg>
-      </button>
-      <a href="account.html" class="icon-btn" id="account-link">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="3.4"/><path d="M5 20c1.2-3.8 4-5.6 7-5.6s5.8 1.8 7 5.6"/></svg>
-      </a>
-      <a href="cart.html" class="icon-btn cart-btn">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h2l2.2 11.1a2 2 0 0 0 2 1.6h7.6a2 2 0 0 0 2-1.6L21 8H6"/><circle cx="9" cy="21" r="1.3"/><circle cx="18" cy="21" r="1.3"/></svg>
-        <span class="cart-count" id="cart-count">0</span>
-      </a>
-      <button class="hamburger" id="hamburger">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </div>
-  <div class="search-bar" id="search-bar">
-    <div class="container">
-      <input type="text" id="search-input" placeholder="جستجو...">
-      <button id="search-close">بستن</button>
-    </div>
-  </div>
-</header>
-
+{% block content %}
 <!-- PAGE HEADER -->
 <section class="page-header">
   <div class="container">
     <div class="breadcrumb">
-      <a href="index.html">خانه</a> /
-      <a href="products.html">پیراهن‌ها</a> /
-      نام محصول
+      <a href="{% url 'website:index' %}">خانه</a> /
+      <a href="{% url 'shop:products' %}">پیراهن‌ها</a> /
+      {{object.name}}
     </div>
-    <h1>نام محصول</h1>
+    <h1>{{object.name}}</h1>
   </div>
 </section>
 
@@ -68,39 +22,50 @@
       <!-- GALLERY -->
       <div class="gallery">
         <div class="gallery-main">
+          {% with object.product_images.all as imgs %}
+          {% for img in imgs %}
+          {% if img.is_main %}
           <img id="gallery-main-img"
-               src="https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?q=80&w=900&auto=format&fit=crop"
-               alt="نام محصول">
+               src="{{img.image.url}}"
+               alt="{{object.name}}">
+          {% endif %}
+          {% endfor %}
+          {% endwith %}
         </div>
 
-        <!-- تامبنیل‌ها — اینجا for بزن روی product.images -->
+        
         <div class="gallery-thumbs">
-          <img src="https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?q=80&w=200&auto=format&fit=crop"
-               class="active" data-img="https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?q=80&w=900&auto=format&fit=crop">
-          <img src="https://images.unsplash.com/photo-1603252109303-2751441dd157?q=80&w=200&auto=format&fit=crop"
-               data-img="https://images.unsplash.com/photo-1603252109303-2751441dd157?q=80&w=900&auto=format&fit=crop">
+          {% for img in object.product_images.all %}
+          <img src="{{img.image.url}}"
+               class="{% if img.is_main %}active{% endif %}" data-img="{{img.image.url}}">
+          {% endfor %}
         </div>
       </div>
 
       <!-- INFO -->
       <div class="detail-info">
 
-        <span class="product-cat">کلاسیک</span>
-        <h1>نام محصول</h1>
+        <span class="product-cat">{{object.category.name}}</span>
+        <h1>{{object.name}}</h1>
 
-        <div class="detail-rating">
+        <!--<div class="detail-rating">
           <span class="stars">★★★★★</span>
           ۴.۸ از ۵ · ۳۴ نظر
-        </div>
+        </div>-->
 
         <div class="detail-price">
-          <!-- اگه sale_price داری، قیمت اصلی رو اینجا خط بزن -->
-          <!-- <span style="text-decoration:line-through; color:#aaa; font-size:16px; font-weight:400;">۱٬۵۰۰٬۰۰۰</span> -->
-          ۱٬۲۹۰٬۰۰۰<span> تومان</span>
+          {% if object.discount_percent %}
+          <span><del class="product-price formatted-price">
+              {{ object.price }}
+          </del></span>
+          <strong class="product-price formatted-price">{{object.get_price }}</strong>
+          {% else %}
+          <strong class="formatted-price">{{object.price }}</strong> 
+          {% endif %}
         </div>
 
         <p class="detail-desc">
-          توضیحات محصول اینجا نمایش داده می‌شود.
+          {{object.description}}
         </p>
 
         <!-- ADD TO CART FORM -->
@@ -112,18 +77,14 @@
             <div class="size-label">انتخاب رنگ</div>
           </div>
           <div class="color-options" style="margin-bottom:20px;">
-            <label title="سفید">
-              <input type="radio" name="color" value="1" checked style="display:none;">
-              <span class="swatch active" style="background:#f4efe5; width:26px; height:26px;"
+            {% for color in colors %}
+            <label title="{{color.name}}">
+              <input type="radio" name="color" value="{{color.id}}" checked style="display:none;">
+              <span class="swatch" style="background-color: {{ color.code }}; width:26px; height:26px;"
                     onclick="document.querySelectorAll('.color-options .swatch').forEach(s=>s.classList.remove('active')); this.classList.add('active');">
               </span>
             </label>
-            <label title="سبز">
-              <input type="radio" name="color" value="2" style="display:none;">
-              <span class="swatch" style="background:#28433d; width:26px; height:26px;"
-                    onclick="document.querySelectorAll('.color-options .swatch').forEach(s=>s.classList.remove('active')); this.classList.add('active');">
-              </span>
-            </label>
+            {% endfor %}
           </div>
 
           <!-- سایزها — اینجا for بزن روی product.sizes -->
@@ -132,19 +93,12 @@
             <a href="blog-post.html?slug=size-guide" class="size-guide-link">راهنمای سایزبندی</a>
           </div>
           <div class="size-options" style="margin-bottom:22px;">
-            <button type="button" class="active"
-                    onclick="document.querySelectorAll('.size-options button').forEach(b=>b.classList.remove('active')); this.classList.add('active'); document.getElementById('size-input').value=this.dataset.size;"
-                    data-size="S">S</button>
+            {% for size in sizes %}
             <button type="button"
                     onclick="document.querySelectorAll('.size-options button').forEach(b=>b.classList.remove('active')); this.classList.add('active'); document.getElementById('size-input').value=this.dataset.size;"
-                    data-size="M">M</button>
-            <button type="button"
-                    onclick="document.querySelectorAll('.size-options button').forEach(b=>b.classList.remove('active')); this.classList.add('active'); document.getElementById('size-input').value=this.dataset.size;"
-                    data-size="L">L</button>
-            <button type="button"
-                    onclick="document.querySelectorAll('.size-options button').forEach(b=>b.classList.remove('active')); this.classList.add('active'); document.getElementById('size-input').value=this.dataset.size;"
-                    data-size="XL">XL</button>
-            <input type="hidden" name="size" id="size-input" value="S">
+                    data-size="{{size.name}}">{{size.name}}</button>
+            <input type="hidden" name="size" id="size-input" value="{{size.name}}">
+            {% endfor %}
           </div>
 
           <!-- تعداد + افزودن به سبد -->
@@ -186,7 +140,7 @@
     </div>
 
     <div class="tab-panel active" data-panel="desc">
-      <p>توضیحات کامل محصول اینجا نمایش داده می‌شود.</p>
+      <p>{{object.brief_description}}</p>
     </div>
 
     <div class="tab-panel" data-panel="care">
@@ -232,39 +186,6 @@
   </div>
 </section>
 
-<!-- FOOTER -->
-<footer class="site-footer">
-  <div class="container footer-grid">
-    <div class="footer-brand">
-      <a href="index.html" class="logo">
-        <span class="logo-mark">پ</span>
-        <span class="logo-text">پیراهن‌کده</span>
-      </a>
-      <p>پیراهن مردانه با پارچهٔ اصل و دوخت اصیل ایرانی.</p>
-    </div>
-    <div class="footer-col">
-      <h4>فروشگاه</h4>
-      <a href="products.html">همهٔ پیراهن‌ها</a>
-      <a href="blog.html">وبلاگ</a>
-      <a href="about.html">درباره ما</a>
-    </div>
-    <div class="footer-col">
-      <h4>حساب کاربری</h4>
-      <a href="login.html">ورود</a>
-      <a href="register.html">ثبت‌نام</a>
-      <a href="account.html">سفارش‌های من</a>
-    </div>
-    <div class="footer-col">
-      <h4>ارتباط با ما</h4>
-      <a href="tel:02100000000">۰۲۱-۰۰۰۰۰۰۰۰</a>
-      <a href="mailto:[email protected]">[email protected]</a>
-    </div>
-  </div>
-  <div class="container footer-bottom">
-    <p>© ۱۴۰۴ پیراهن‌کده. تمامی حقوق محفوظ است.</p>
-  </div>
-</footer>
-
 <div class="modal-overlay" id="modal-overlay"></div>
 <div class="product-modal" id="product-modal"></div>
 <div class="toast" id="toast"></div>
@@ -289,7 +210,4 @@ document.querySelectorAll(".tab-btn").forEach(btn => {
   });
 });
 </script>
-
-<script src="main.js"></script>
-</body>
-</html>
+{% endblock %}
