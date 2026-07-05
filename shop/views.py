@@ -33,6 +33,16 @@ class ProductDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["sizes"] = SizeProductModel.objects.filter(size_products__product=self.get_object()).distinct()
-        context["colors"] = ColorProductModel.objects.filter(color_products__product=self.get_object()).distinct()
+        product = self.get_object()
+        context["sizes"] = SizeProductModel.objects.filter(size_products__product=product).distinct()
+        context["colors"] = ColorProductModel.objects.filter(color_products__product=product).distinct()
+        size = self.request.GET.get("size")
+        color = self.request.GET.get("color")
+        try:
+            if size and color:
+                context["variant"] = ProductVariant.objects.get(product__id=product.id, size__id=size, color__id=color)
+            else:
+                context["variant"] = None
+        except ProductVariant.DoesNotExist:
+            context["variant"] = None
         return context
