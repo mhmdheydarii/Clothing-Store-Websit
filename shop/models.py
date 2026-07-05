@@ -83,7 +83,7 @@ class ProductVariant(models.Model):
     updated_date = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.product.name
+        return f"{self.product.name} + {self.size.name} + {self.color.name}"
     
     class Meta:
         ordering = ["-created_date"]
