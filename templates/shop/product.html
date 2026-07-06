@@ -106,11 +106,27 @@
           </div>
 
           <!-- تعداد + افزودن به سبد -->
-          <div class="qty-add-row">
-            <button type="submit" class="btn btn-primary" onclick="AddToCart('{{variant.id}}')" style="flex:1;">
-              افزودن به سبد خرید
-            </button>
-          </div>
+          {% if variant %}
+            {% if variant.stock > 0 %}
+            <div class="qty-add-row">
+              <button type="submit" class="btn btn-primary" onclick="AddToCart('{{variant.id}}')" style="flex:1;">
+                افزودن به سبد خرید
+              </button>
+            </div>
+            {% else %}
+            <div class="qty-add-row">
+              <button class="btn btn-outline-dange" disabled style="flex:1;">
+               موجودی کالا به اتمام رسیده است
+              </button>
+            </div>
+            {% endif %}
+          {% else %}
+            <div class="qty-add-row">
+              <button class="btn btn-outline-dange" disabled style="flex:1;">
+              لطفا رنگ و سایز را انتخاب کنید
+              </button>
+            </div>
+          {% endif %}
 
         <!--</form>-->
         <!-- /FORM -->
