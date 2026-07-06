@@ -107,15 +107,6 @@
 
           <!-- تعداد + افزودن به سبد -->
           <div class="qty-add-row">
-            <div class="qty-control big"
-              style="display:flex; align-items:center; border:1.5px solid #e0d9d0; border-radius:10px; padding:0 6px;">
-              <button type="button" style="width:36px; height:42px; border-radius:8px;"
-                onclick="const i=document.getElementById('qty-input'); if(i.value>1) i.value=parseInt(i.value)-1;">−</button>
-              <input type="number" id="qty-input" name="quantity" value="1" min="1"
-                style="width:40px; text-align:center; border:none; background:transparent; font-family:Vazirmatn,sans-serif; font-size:15px;">
-              <button type="button" style="width:36px; height:42px; border-radius:8px;"
-                onclick="const i=document.getElementById('qty-input'); i.value=parseInt(i.value)+1;">+</button>
-            </div>
             <button type="submit" class="btn btn-primary" onclick="AddToCart('{{variant.id}}')" style="flex:1;">
               افزودن به سبد خرید
             </button>
@@ -194,44 +185,4 @@
 <div class="product-modal" id="product-modal"></div>
 <div class="toast" id="toast"></div>
 
-<script>
-  // تامبنیل گالری
-  document.querySelectorAll("[data-img]").forEach(img => {
-    img.addEventListener("click", () => {
-      document.getElementById("gallery-main-img").src = img.dataset.img;
-      document.querySelectorAll("[data-img]").forEach(i => i.classList.remove("active"));
-      img.classList.add("active");
-    });
-  });
-
-  // تب‌ها
-  document.querySelectorAll(".tab-btn").forEach(btn => {
-    btn.addEventListener("click", () => {
-      document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
-      document.querySelectorAll(".tab-panel").forEach(p => p.classList.remove("active"));
-      btn.classList.add("active");
-      document.querySelector(`[data-panel="${btn.dataset.tab}"]`).classList.add("active");
-    });
-  });
-</script>
-<script>
-  function AddToCart(product_id) {
-    console.log(product_id)
-    $.ajax({
-      url: '{% url "cart:add-product" %}',
-      type: 'POST',
-      data: {
-        product_id: product_id,
-        csrfmiddlewaretoken: '{{ csrf_token }}'
-      },
-      success: function (response) {
-        $("#product-cart-item-count").html(response.total_quantity)
-        console.log(response);
-      },
-      error: function (xhr, status, error) {
-        console.error(error);
-      }
-    });
-  }
-</script>
 {% endblock %}

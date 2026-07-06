@@ -33,10 +33,14 @@ class CartSession:
     
 
     def update_product_quantity(self, product_id, quantity):
+        variant_obj = ProductVariant.objects.get(id=product_id)
+        quantity = int(quantity)
+
         for item in self._cart["items"]:
             if product_id == item["product_id"]:
-                item["quantity"] = int(quantity)
-                break
+                if quantity <= variant_obj.stock and quantity > 0:
+                    item["quantity"] = quantity
+                    break
         else:
             return
         self.save()
@@ -54,21 +58,21 @@ class CartSession:
     def get_product_item(self):
         cart_items = self._cart["items"]
         for item in cart_items:
-            product_obj = ProductVariant.objects.get(id=item["product_id"])
-            product_image = product_obj.product.product_images.filter(is_main=True).first()
-            item["product_obj"] = {
-                "id":product_obj.id,
-                "product":product_obj.product.name,
-                "color":product_obj.color.code,
-                "size":product_obj.size.name,
-                "stock":product_obj.stock,
+            variant_obj = ProductVariant.objects.get(id=item["product_id"])
+            product_image = variant_obj.product.product_images.filter(is_main=True).first()
+            item["variant_obj"] = {
+                "id":variant_obj.id,
+                "product":variant_obj.product.name,
+                "color":variant_obj.color.name,
+                "size":variant_obj.size.name,
+                "stock":variant_obj.stock,
                 "image": product_image.image.url,
-                "price":int(product_obj.product.get_price())
+                "price":int(variant_obj.product.get_price())
             }
             item.update(
                 {
-                    "product_obj": item["product_obj"],
-                    "price": item["quantity"] * product_obj.product.get_price()
+                    "variant_obj": item["variant_obj"],
+                    "total_price": item["quantity"] * variant_obj.product.get_price()
                 }
             )
         return cart_items

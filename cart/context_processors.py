@@ -1,5 +1,6 @@
-from .models import CartModel
+from .cart import CartSession
+
 
 def cart_products(request):
-    cart = CartModel(request.session)
+    cart = CartSession(request.session)
     return {"cart":cart}
