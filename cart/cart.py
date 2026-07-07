@@ -85,3 +85,30 @@ class CartSession:
     
     def save(self):
         self.session.modified = True
+
+
+    def sync_cart_item_from_db(self, user):
+        cart, created = CartModel.objects.get_or_create(user=user)
+        cart_items = CartItemModel.objects.filter(cart=cart)
+
+        for cart_item in cart_items:
+            for item in self._cart["items"]:
+                if str(cart_item.product_variant.id) == item["product_id"]:
+                    cart_item.quantity = item["quantity"] 
+                    break
+            else:
+                new_item = {"product_id":str(cart_item.product_variant.id), "quantity":cart_item.quantity}
+                self._cart["items"].append(new_item)
+        self.merge_session_cart_in_db(user)
+        self.save()
+
+    def merge_session_cart_in_db(self, user):
+        cart, created = CartModel.objects.get_or_create(user=user)
+        
+        for item in self._cart["items"]:
+            variant_obj = ProductVariant.objects.get(id=item["product_id"], product__status=True)
+            cart_item, created = CartItemModel.objects.get_or_create(cart=cart, product_variant=variant_obj)
+            cart_item.quantity = item["quantity"]
+            cart_item.save()
+        session_product_ids = (item["product_id"] for item in self._cart["items"])
+        CartItemModel.objects.filter(cart=cart).exclude(product_variant__id__in=session_product_ids).delete()
