@@ -96,26 +96,13 @@
           <span>رایگان</span>
         </div>
 
-        <!-- کد تخفیف -->
-        <form method="post" action="#" class="promo-row">
-          <!-- csrf_token اینجا -->
-          <input type="text" name="promo_code" placeholder="کد تخفیف">
-          <button type="submit" class="btn btn-dark" style="padding:10px 16px;">اعمال</button>
-        </form>
-
-        <!-- اگه کد تخفیف اعمال شد اینجا نشون بده -->
-        <div class="summary-row" style="color:green;">
-          <span>تخفیف</span>
-          <span>− ۱۰۰٬۰۰۰ تومان</span>
-        </div>
-
         <div class="summary-row total">
           <span>جمع کل</span>
           <!-- اینجا جمع نهایی رو از بک‌اند بگیر -->
           <span class="formatted-price">{{total_payment}}</span>
         </div>
 
-        <a href="checkout.html" class="btn btn-primary btn-block">
+        <a href="{% url 'order:checkout' %}" class="btn btn-primary btn-block">
           ادامهٔ خرید
         </a>
 

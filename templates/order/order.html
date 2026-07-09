@@ -1,102 +1,199 @@
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-<title>سفارش من | پیراهن‌کده</title>
-<meta name="description" content="پیگیری وضعیت سفارش.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&family=Lalezar&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
-</head>
-<body>
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
 
-<header class="site-header" id="site-header">
-  <div class="container header-inner">
-    <a href="index.html" class="logo">
-      <span class="logo-mark">پ</span>
-      <span class="logo-text">پیراهن‌کده</span>
-    </a>
-
-    <nav class="main-nav" id="main-nav">
-      <a href="index.html" class="nav-link">خانه</a>
-      <a href="products.html" class="nav-link active-link">پیراهن‌ها</a>
-      <a href="blog.html" class="nav-link">وبلاگ</a>
-      <a href="about.html" class="nav-link">درباره ما</a>
-      <a href="contact.html" class="nav-link">تماس</a>
-    </nav>
-
-    <div class="header-actions">
-      <button class="icon-btn" id="search-toggle" aria-label="جستجو">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><line x1="20" y1="20" x2="16.5" y2="16.5"/></svg>
-      </button>
-      <a href="account.html" class="icon-btn" aria-label="حساب کاربری" id="account-link">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="3.4"/><path d="M5 20c1.2-3.8 4-5.6 7-5.6s5.8 1.8 7 5.6"/></svg>
-      </a>
-      <a href="cart.html" class="icon-btn cart-btn" id="cart-toggle" aria-label="سبد خرید">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h2l2.2 11.1a2 2 0 0 0 2 1.6h7.6a2 2 0 0 0 2-1.6L21 8H6"/><circle cx="9" cy="21" r="1.3"/><circle cx="18" cy="21" r="1.3"/></svg>
-        <span class="cart-count" id="cart-count">0</span>
-      </a>
-      <button class="hamburger" id="hamburger" aria-label="منو">
-        <span></span><span></span><span></span>
-      </button>
+<!-- PAGE HEADER -->
+<section class="page-header">
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="{% url 'website:index' %}">خانه</a> /
+      <a href="{% url 'cart:cart-products' %}">سبد خرید</a> /
+      تکمیل سفارش
     </div>
+    <h1>تکمیل سفارش</h1>
   </div>
-
-  <div class="search-bar" id="search-bar">
-    <div class="container">
-      <input type="text" id="search-input" placeholder="جستجوی پیراهن... مثلاً «راه‌راه آبی»">
-      <button id="search-close">بستن</button>
-    </div>
-  </div>
-</header>
-
-
-<section class="order-section">
-  <div class="container" id="order-root"></div>
 </section>
 
 
-<footer class="site-footer" id="footer">
-  <div class="container footer-grid">
-    <div class="footer-brand">
-      <a href="index.html" class="logo">
-        <span class="logo-mark">پ</span>
-        <span class="logo-text">پیراهن‌کده</span>
-      </a>
-      <p>پیراهن مردانه با پارچهٔ اصل و دوخت اصیل ایرانی.</p>
-    </div>
-    <div class="footer-col">
-      <h4>فروشگاه</h4>
-      <a href="products.html">همهٔ پیراهن‌ها</a>
-      <a href="blog.html">وبلاگ</a>
-      <a href="about.html">درباره ما</a>
-    </div>
-    <div class="footer-col">
-      <h4>حساب کاربری</h4>
-      <a href="login.html">ورود</a>
-      <a href="register.html">ثبت‌نام</a>
-      <a href="account.html">سفارش‌های من</a>
-    </div>
-    <div class="footer-col">
-      <h4>ارتباط با ما</h4>
-      <a href="tel:02100000000">۰۲۱-۰۰۰۰۰۰۰۰</a>
-      <a href="mailto:[email protected]">[email protected]</a>
-      <a href="contact.html">فرم تماس</a>
+<!-- STEPS -->
+<div style="background:#fff; border-bottom:1px solid #ede8e0; padding:18px 0;">
+  <div class="container">
+    <div class="checkout-steps">
+      <span>۱. سبد خرید</span>
+      <span style="color:#a39a8c;">←</span>
+      <span class="active">۲. تکمیل سفارش</span>
+      <span style="color:#a39a8c;">←</span>
+      <span>۳. پرداخت</span>
+      <span style="color:#a39a8c;">←</span>
+      <span>۴. نتیجه</span>
     </div>
   </div>
-  <div class="container footer-bottom">
-    <p>© ۱۴۰۴ پیراهن‌کده. تمامی حقوق محفوظ است.</p>
+</div>
+
+
+<!-- CHECKOUT -->
+<section class="checkout-section">
+  <div class="container">
+    <div class="checkout-layout">
+
+      <!-- ==================== FORM ==================== -->
+      <div>
+        <form method="post" action="#">
+          <!-- csrf_token اینجا -->
+
+          <!-- آدرس -->
+          <fieldset class="checkout-form">
+            <legend>آدرس تحویل</legend>
+
+            <div class="form-row">
+              <div class="form-field">
+                <label>نام گیرنده</label>
+                <input type="text" name="fullname" placeholder="نام و نام خانوادگی">
+              </div>
+              <div class="form-field">
+                <label>شماره موبایل</label>
+                <input type="tel" name="phone" placeholder="۰۹xxxxxxxxx">
+              </div>
+            </div>
+
+            <div class="form-field">
+              <label>استان</label>
+              <select name="province">
+                <option value="">انتخاب استان</option>
+                <option value="tehran">تهران</option>
+                <option value="isfahan">اصفهان</option>
+                <option value="mashhad">خراسان رضوی</option>
+                <option value="shiraz">فارس</option>
+                <option value="tabriz">آذربایجان شرقی</option>
+              </select>
+            </div>
+
+            <div class="form-row">
+              <div class="form-field">
+                <label>شهر</label>
+                <input type="text" name="city" placeholder="نام شهر">
+              </div>
+              <div class="form-field">
+                <label>کد پستی</label>
+                <input type="text" name="postal_code" placeholder="۱۰ رقمی">
+              </div>
+            </div>
+
+            <div class="form-field">
+              <label>آدرس کامل</label>
+              <textarea name="address" rows="3"
+                placeholder="خیابان، کوچه، پلاک، واحد..."></textarea>
+            </div>
+
+          </fieldset>
+
+          <!-- کد تخفیف -->
+          <fieldset class="checkout-form" style="margin-top:10px;">
+            <legend>کد تخفیف</legend>
+            <div class="promo-row">
+              <input type="text" name="promo_code" placeholder="کد تخفیف خود را وارد کنید">
+              <button type="submit" name="action" value="apply_promo"
+                      class="btn btn-dark" style="padding:12px 20px; white-space:nowrap;">
+                اعمال کد
+              </button>
+            </div>
+            <!-- اینجا if بزن — اگه کد تخفیف اعمال شده بود نشون بده -->
+            <div style="margin-top:10px; font-size:13.5px; color:green; display:flex; align-items:center; gap:6px;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><path d="M5 13l4 4L19 7"/></svg>
+              کد تخفیف «SUMMER10» اعمال شد — ۱۰٪ تخفیف
+            </div>
+            <!-- اینجا if بزن — اگه کد اشتباه بود نشون بده -->
+            <div style="margin-top:10px; font-size:13.5px; color:#c0392b; display:flex; align-items:center; gap:6px;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              کد تخفیف نامعتبر است.
+            </div>
+          </fieldset>
+
+          <!-- روش ارسال -->
+          <fieldset class="checkout-form" style="margin-top:10px;">
+            <legend>روش ارسال</legend>
+            <div class="payment-options">
+              <label>
+                <input type="radio" name="shipping" value="post" checked>
+                پست پیشتاز — ۳ تا ۵ روز کاری (رایگان)
+              </label>
+              <label>
+                <input type="radio" name="shipping" value="express">
+                ارسال اکسپرس — ۱ روز کاری (۵۰٬۰۰۰ تومان)
+              </label>
+            </div>
+          </fieldset>
+
+          <!-- دکمه رفتن به پرداخت -->
+          <button type="submit" name="action" value="goto_payment"
+                  class="btn btn-primary btn-block" style="margin-top:24px;">
+            ادامه و رفتن به درگاه پرداخت
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                 width="16" height="16" style="margin-right:6px;">
+              <line x1="19" y1="12" x2="5" y2="12"/>
+              <polyline points="12 19 5 12 12 5"/>
+            </svg>
+          </button>
+
+        </form>
+      </div>
+      <!-- /FORM -->
+
+
+      <!-- ==================== SUMMARY ==================== -->
+      <aside class="summary-card" style="align-self:start;">
+        <h3>خلاصهٔ سفارش</h3>
+
+        <!-- اینجا for بزن روی cart_items -->
+        <div style="display:flex; flex-direction:column; gap:12px; margin-bottom:18px;">
+
+          <!-- یه آیتم نمونه -->
+          <div style="display:flex; gap:10px; align-items:center;">
+            <img src="https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?q=80&w=200&auto=format&fit=crop"
+                 alt="نام محصول"
+                 style="width:52px; height:62px; object-fit:cover; border-radius:7px; flex-shrink:0;">
+            <div style="flex:1; font-size:13px;">
+              <div style="font-weight:600; margin-bottom:3px;">نام محصول</div>
+              <div style="color:#8a8275;">سایز M · رنگ سفید · ×۱</div>
+            </div>
+            <div style="font-size:13px; font-weight:700; white-space:nowrap;">
+              ۱٬۲۹۰٬۰۰۰ تومان
+            </div>
+          </div>
+          <!-- /آیتم نمونه -->
+
+        </div>
+
+        <div style="border-top:1px solid #ede8e0; padding-top:14px;">
+          <div class="summary-row">
+            <span>جمع کالاها</span>
+            <!-- از بک‌اند -->
+            <span>۲٬۵۸۰٬۰۰۰ تومان</span>
+          </div>
+          <div class="summary-row">
+            <span>هزینهٔ ارسال</span>
+            <span>رایگان</span>
+          </div>
+          <!-- اینجا if بزن روی discount -->
+          <div class="summary-row" style="color:green;">
+            <span>تخفیف</span>
+            <span>− ۲۵۸٬۰۰۰ تومان</span>
+          </div>
+          <div class="summary-row total">
+            <span>مبلغ قابل پرداخت</span>
+            <!-- از بک‌اند -->
+            <span>۲٬۳۲۲٬۰۰۰ تومان</span>
+          </div>
+        </div>
+
+        <a href="cart.html"
+           style="display:block; text-align:center; margin-top:14px; font-size:13px; color:#8a8275;">
+          بازگشت به سبد خرید
+        </a>
+      </aside>
+      <!-- /SUMMARY -->
+
+    </div>
   </div>
-</footer>
-
-<div class="cart-overlay" id="cart-overlay"></div>
-<div class="modal-overlay" id="modal-overlay"></div>
-<div class="product-modal" id="product-modal"></div>
-<div class="toast" id="toast"></div>
-
-<script src="main.js"></script>
-
-</body>
-</html>
+</section>
+{% endblock %}
