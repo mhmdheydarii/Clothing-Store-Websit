@@ -3,6 +3,7 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 from django.utils import timezone
 from accounts.models import User
 from shop.models import ProductVariant
+from accounts.validators import validate_iranian_cellphone_number
 
 # Create your models here.
 
@@ -25,6 +26,8 @@ class CouponModel(models.Model):
 
 class AddressModel(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    fullname = models.CharField(max_length=255, null=True, blank=True)
+    phone_number = models.CharField(max_length=12, validators=[validate_iranian_cellphone_number] ,null=True, blank=True)
 
     address = models.TextField()
     state = models.CharField(max_length=255)
