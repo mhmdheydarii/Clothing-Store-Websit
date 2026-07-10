@@ -1,15 +1,18 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView, FormView
-from .forms import OrderForm
+from django.contrib.auth.mixins import LoginRequiredMixin
+from .permissions import HasCustomerPermission
+
+from .forms import CheckoutForm
 from cart.models import CartModel
 from .models import OrderModel, OrderItemModel
 from cart.cart import CartSession
 # Create your views here.
 
-class CheckoutView(FormView):
+class CheckoutView(HasCustomerPermission, LoginRequiredMixin, FormView):
     template_name = "order/order.html"
-    form_class = OrderForm
+    form_class = CheckoutForm
     success_url = reverse_lazy("order:success")
 
     def form_valid(self, form):
