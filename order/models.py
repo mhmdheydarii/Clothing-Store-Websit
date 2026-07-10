@@ -24,26 +24,6 @@ class CouponModel(models.Model):
         ordering = ["-created_date"]
 
 
-class AddressModel(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    fullname = models.CharField(max_length=255, null=True, blank=True)
-    phone_number = models.CharField(max_length=12, validators=[validate_iranian_cellphone_number] ,null=True, blank=True)
-
-    address = models.TextField()
-    state = models.CharField(max_length=255)
-    city = models.CharField(max_length=255)
-    zip_code = models.CharField(max_length=50)
-
-    created_date = models.DateTimeField(auto_now_add=True)
-    updated_date = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return self.user.email
-    
-    class Meta:
-        ordering = ["-created_date"]
-
-
 class OrderModel(models.Model):
 
     class OrderStatusTypeModel(models.TextChoices):
@@ -53,6 +33,8 @@ class OrderModel(models.Model):
 
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="orders")
 
+    fullname = models.CharField(max_length=255, null=True, blank=True)
+    phone_number = models.CharField(max_length=12, validators=[validate_iranian_cellphone_number] ,null=True, blank=True)
     address = models.TextField()
     state = models.CharField(max_length=255)
     city = models.CharField(max_length=255)
@@ -80,6 +62,7 @@ class OrderItemModel(models.Model):
     order = models.ForeignKey(OrderModel, on_delete=models.CASCADE, related_name="order_items")
     product_variant = models.ForeignKey(ProductVariant, on_delete=models.SET_NULL, null=True)
     quantity = models.PositiveIntegerField(default=0)
+    price = models.DecimalField(default=0, max_digits=10, decimal_places=0)
 
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)

@@ -86,6 +86,11 @@ class CartSession:
     def save(self):
         self.session.modified = True
 
+    def clear(self):
+        self._cart = self.session["cart"] = {"items": []}
+        self.save()
+
+
 
     def sync_cart_item_from_db(self, user):
         cart, created = CartModel.objects.get_or_create(user=user)

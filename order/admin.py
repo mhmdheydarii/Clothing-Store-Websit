@@ -1,7 +1,6 @@
 from django.contrib import admin
 from .models import (
     CouponModel,
-    AddressModel,
     OrderModel,
     OrderItemModel
 )
@@ -19,18 +18,6 @@ class CouponAdmin(admin.ModelAdmin):
         ]
     search_fields = ["code"]
     list_filter = ["discount_percent"]
-
-@admin.register(AddressModel)
-class AddressAdmin(admin.ModelAdmin):
-    list_display = [
-        "user",
-        "state", 
-        "city", 
-        "zip_code", 
-        "created_date"
-        ]
-    list_filter = ["state"]
-    search_fields = ["city"]
 
 @admin.register(OrderModel)
 class OrderAdmin(admin.ModelAdmin):

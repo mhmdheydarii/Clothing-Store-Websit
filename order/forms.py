@@ -1,8 +1,8 @@
 from django import forms
-from .models import AddressModel
+from .models import OrderModel
 
-class OrderAddressForm(forms.ModelForm):
+class OrderForm(forms.ModelForm):
 
     class Meta:
-        model = AddressModel
+        model = OrderModel
         fields =["fullname", "phone_number", "address", "state", "city", "zip_code"]
