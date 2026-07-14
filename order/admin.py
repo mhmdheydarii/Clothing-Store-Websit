@@ -12,7 +12,7 @@ class CouponAdmin(admin.ModelAdmin):
     list_display = [
         "code",
         "discount_percent", 
-        "max_limit_user", 
+        "max_limit_usage", 
         "expiered_date", 
         "created_date"
         ]

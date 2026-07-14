@@ -10,10 +10,10 @@ from accounts.validators import validate_iranian_cellphone_number
 class CouponModel(models.Model):
     code = models.CharField(max_length=255)
     discount_percent = models.IntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(100)])
-    max_limit_user = models.PositiveIntegerField(default=0)
+    max_limit_usage = models.PositiveIntegerField(default=0)
     used_by = models.ManyToManyField(User, related_name="coupon_users", null=True, blank=True)
 
-    expiered_date = models.DateTimeField(default=timezone.now())
+    expiered_date = models.DateTimeField(default=timezone.now)
     updated_date = models.DateTimeField(auto_now=True)
     created_date = models.DateTimeField(auto_now_add=True)
 

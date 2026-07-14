@@ -15,22 +15,6 @@
 </section>
 
 
-<!-- STEPS -->
-<div style="background:#fff; border-bottom:1px solid #ede8e0; padding:18px 0;">
-  <div class="container">
-    <div class="checkout-steps">
-      <span>۱. سبد خرید</span>
-      <span style="color:#a39a8c;">←</span>
-      <span class="active">۲. تکمیل سفارش</span>
-      <span style="color:#a39a8c;">←</span>
-      <span>۳. پرداخت</span>
-      <span style="color:#a39a8c;">←</span>
-      <span>۴. نتیجه</span>
-    </div>
-  </div>
-</div>
-
-
 <!-- CHECKOUT -->
 <section class="checkout-section">
   <div class="container">
@@ -135,34 +119,11 @@
 
 
       <!-- ==================== SUMMARY ==================== -->
-      <aside class="summary-card" style="align-self:start;">
-        <h3>خلاصهٔ سفارش</h3>
-
-        <!-- اینجا for بزن روی cart_items -->
-        <div style="display:flex; flex-direction:column; gap:12px; margin-bottom:18px;">
-
-          <!-- یه آیتم نمونه -->
-          <div style="display:flex; gap:10px; align-items:center;">
-            <img src="https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?q=80&w=200&auto=format&fit=crop"
-                 alt="نام محصول"
-                 style="width:52px; height:62px; object-fit:cover; border-radius:7px; flex-shrink:0;">
-            <div style="flex:1; font-size:13px;">
-              <div style="font-weight:600; margin-bottom:3px;">نام محصول</div>
-              <div style="color:#8a8275;">سایز M · رنگ سفید · ×۱</div>
-            </div>
-            <div style="font-size:13px; font-weight:700; white-space:nowrap;">
-              ۱٬۲۹۰٬۰۰۰ تومان
-            </div>
-          </div>
-          <!-- /آیتم نمونه -->
-
-        </div>
-
         <div style="border-top:1px solid #ede8e0; padding-top:14px;">
           <div class="summary-row">
             <span>جمع کالاها</span>
             <!-- از بک‌اند -->
-            <span>۲٬۵۸۰٬۰۰۰ تومان</span>
+            <span class="formatted-price">{{total_price}}</span>
           </div>
           <div class="summary-row">
             <span>هزینهٔ ارسال</span>
@@ -176,11 +137,11 @@
           <div class="summary-row total">
             <span>مبلغ قابل پرداخت</span>
             <!-- از بک‌اند -->
-            <span>۲٬۳۲۲٬۰۰۰ تومان</span>
+            <span class="formatted-price">{{total_price}}</span>
           </div>
         </div>
 
-        <a href="cart.html"
+        <a href="{% url 'cart:cart-products' %}"
            style="display:block; text-align:center; margin-top:14px; font-size:13px; color:#8a8275;">
           بازگشت به سبد خرید
         </a>

@@ -5,7 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from .permissions import HasCustomerPermission
 
 from .forms import CheckoutForm
-from cart.models import CartModel
+from cart.models import CartModel, CartItemModel
 from .models import OrderModel, OrderItemModel
 from cart.cart import CartSession
 # Create your views here.
@@ -35,6 +35,12 @@ class CheckoutView(HasCustomerPermission, LoginRequiredMixin, FormView):
         CartSession(self.request.session).clear()
         return super().form_valid(form)
     
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        cart = CartModel.objects.get(user=self.request.user)
+        total_price = cart.calculate_total_price()
+        context["total_price"] = total_price
+        return context
 
 class SuccessView(TemplateView):
     template_name = "order/success.html"
