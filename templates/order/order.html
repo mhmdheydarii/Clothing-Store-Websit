@@ -22,67 +22,71 @@
 
       <!-- ==================== FORM ==================== -->
       <div>
-        <form method="post">
-          <!-- csrf_token اینجا -->
-          {% csrf_token %}
           <!-- آدرس -->
-          <fieldset class="checkout-form">
-            <legend>آدرس تحویل</legend>
+          <form method="post">
+            <!-- csrf_token اینجا -->
+            {% csrf_token %}
+            <fieldset class="checkout-form">
+              <legend>آدرس تحویل</legend>
 
-            <div class="form-row">
-              <div class="form-field">
-                <label>نام گیرنده</label>
-                <input type="text" name="fullname" placeholder="نام و نام خانوادگی">
+              <div class="form-row">
+                <div class="form-field">
+                  <label>نام گیرنده</label>
+                  <input type="text" name="fullname" placeholder="نام و نام خانوادگی">
+                </div>
+                <div class="form-field">
+                  <label>شماره موبایل</label>
+                  <input type="tel" name="phone_number" placeholder="۰۹xxxxxxxxx">
+                </div>
               </div>
-              <div class="form-field">
-                <label>شماره موبایل</label>
-                <input type="tel" name="phone_number" placeholder="۰۹xxxxxxxxx">
-              </div>
-            </div>
 
-            <div class="form-field">
               <div class="form-field">
-                <label>استان</label>
-                <input type="text" name="state" placeholder="نام استان">
+                <div class="form-field">
+                  <label>استان</label>
+                  <input type="text" name="state" placeholder="نام استان">
+                </div>
               </div>
-            </div>
-            <div class="form-row">
+              <div class="form-row">
+                <div class="form-field">
+                  <label>شهر</label>
+                  <input type="text" name="city" placeholder="نام شهر">
+                </div>
+                <div class="form-field">
+                  <label>کد پستی</label>
+                  <input type="text" name="zip_code" placeholder="۱۰ رقمی">
+                </div>
+              </div>
+
               <div class="form-field">
-                <label>شهر</label>
-                <input type="text" name="city" placeholder="نام شهر">
+                <label>آدرس کامل</label>
+                <textarea name="address" rows="3" placeholder="خیابان، کوچه، پلاک، واحد..."></textarea>
               </div>
-              <div class="form-field">
-                <label>کد پستی</label>
-                <input type="text" name="zip_code" placeholder="۱۰ رقمی">
-              </div>
-            </div>
 
-            <div class="form-field">
-              <label>آدرس کامل</label>
-              <textarea name="address" rows="3"
-                placeholder="خیابان، کوچه، پلاک، واحد..."></textarea>
-            </div>
-
-          </fieldset>
-
+            </fieldset>
+          </form>
           <!-- کد تخفیف -->
           <fieldset class="checkout-form" style="margin-top:10px;">
             <legend>کد تخفیف</legend>
             <div class="promo-row">
-              <input type="text" name="coupon" placeholder="کد تخفیف خود را وارد کنید">
-              <button type="submit" name="action" value="apply_promo"
-                      class="btn btn-dark" style="padding:12px 20px; white-space:nowrap;">
+              <input type="text" name="coupon" id="coupon" placeholder="کد تخفیف خود را وارد کنید">
+              <button type="submit" name="action" value="apply_promo" class="btn btn-dark"
+                style="padding:12px 20px; white-space:nowrap;" onclick="ValidateCoupon()">
                 اعمال کد
               </button>
             </div>
             <!-- اینجا if بزن — اگه کد تخفیف اعمال شده بود نشون بده -->
             <div style="margin-top:10px; font-size:13.5px; color:green; display:flex; align-items:center; gap:6px;">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><path d="M5 13l4 4L19 7"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15">
+                <path d="M5 13l4 4L19 7" />
+              </svg>
               کد تخفیف «SUMMER10» اعمال شد — ۱۰٪ تخفیف
             </div>
             <!-- اینجا if بزن — اگه کد اشتباه بود نشون بده -->
             <div style="margin-top:10px; font-size:13.5px; color:#c0392b; display:flex; align-items:center; gap:6px;">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15">
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
               کد تخفیف نامعتبر است.
             </div>
           </fieldset>
@@ -103,13 +107,13 @@
           </fieldset> روش ارسال -->
 
           <!-- دکمه رفتن به پرداخت -->
-          <button type="submit" name="action" value="goto_payment"
-                  class="btn btn-primary btn-block" style="margin-top:24px;">
+          <button type="submit" name="action" value="goto_payment" class="btn btn-primary btn-block"
+            style="margin-top:24px;">
             ادامه و رفتن به درگاه پرداخت
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                 width="16" height="16" style="margin-right:6px;">
-              <line x1="19" y1="12" x2="5" y2="12"/>
-              <polyline points="12 19 5 12 12 5"/>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"
+              style="margin-right:6px;">
+              <line x1="19" y1="12" x2="5" y2="12" />
+              <polyline points="12 19 5 12 12 5" />
             </svg>
           </button>
 
@@ -119,37 +123,56 @@
 
 
       <!-- ==================== SUMMARY ==================== -->
-        <div style="border-top:1px solid #ede8e0; padding-top:14px;">
-          <div class="summary-row">
-            <span>جمع کالاها</span>
-            <!-- از بک‌اند -->
-            <span class="formatted-price">{{total_price}}</span>
-          </div>
-          <div class="summary-row">
-            <span>هزینهٔ ارسال</span>
-            <span>رایگان</span>
-          </div>
-          <!-- اینجا if بزن روی discount -->
-          <div class="summary-row" style="color:green;">
-            <span>تخفیف</span>
-            <span>− ۲۵۸٬۰۰۰ تومان</span>
-          </div>
-          <div class="summary-row total">
-            <span>مبلغ قابل پرداخت</span>
-            <!-- از بک‌اند -->
-            <span class="formatted-price">{{total_price}}</span>
-          </div>
+      <div style="border-top:1px solid #ede8e0; padding-top:14px;">
+        <div class="summary-row">
+          <span>جمع کالاها</span>
+          <!-- از بک‌اند -->
+          <span class="formatted-price">{{total_price}}</span>
         </div>
+        <div class="summary-row">
+          <span>هزینهٔ ارسال</span>
+          <span>رایگان</span>
+        </div>
+        <!-- اینجا if بزن روی discount -->
+        <div class="summary-row" style="color:green;">
+          <span>تخفیف</span>
+          <span>− ۲۵۸٬۰۰۰ تومان</span>
+        </div>
+        <div class="summary-row total">
+          <span>مبلغ قابل پرداخت</span>
+          <!-- از بک‌اند -->
+          <span class="formatted-price">{{total_price}}</span>
+        </div>
+      </div>
 
-        <a href="{% url 'cart:cart-products' %}"
-           style="display:block; text-align:center; margin-top:14px; font-size:13px; color:#8a8275;">
-          بازگشت به سبد خرید
-        </a>
+      <a href="{% url 'cart:cart-products' %}"
+        style="display:block; text-align:center; margin-top:14px; font-size:13px; color:#8a8275;">
+        بازگشت به سبد خرید
+      </a>
       </aside>
       <!-- /SUMMARY -->
 
     </div>
   </div>
 </section>
-
+<script>
+  function ValidateCoupon() {
+    $.ajax({
+      url: '{% url "order:validate-coupon" %}',
+      type: 'POST',
+      data: {
+        coupon: $("#coupon").val(),
+        csrfmiddlewaretoken: '{{ csrf_token }}'
+      },
+      success: function (response) {
+        console.log(response);
+        alert(response.message);
+        ApplyDiscount(response.total_price);
+      },
+      error: function (xhr, status, error) {
+        console.error(error);
+      }
+    });
+  }
+</script>
 {% endblock %}

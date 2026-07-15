@@ -36,6 +36,18 @@ class CheckoutView(HasCustomerPermission, LoginRequiredMixin, FormView):
             price = cart_item.product_variant.product.get_price()
         )
         order_obj.total_price = order_obj.calculate_total_price()
+        coupon = form.cleaned_data.get("coupon")
+        if coupon:
+            discount_amount = round(
+            order_obj.total_price * (coupon.discount_percent / 100)
+            )
+            
+            order_obj.total_price -= discount_amount
+            order_obj.coupon = coupon
+
+            coupon.used_by.add(user)
+            coupon.save()
+
         order_obj.save()
         cart.cart_items.all().delete()
         CartSession(self.request.session).clear()
@@ -68,7 +80,7 @@ class ValidateCouponView(HasCustomerPermission, LoginRequiredMixin, View):
         try:
             coupon = CouponModel.objects.get(code=code)
         except CouponModel.DoesNotExist:
-            return JsonResponse({"کد تخفیف وجود ندارد"}, status=404)
+            return JsonResponse({"message":"کد تخفیف وجود ندارد"}, status=404)
         
         else:
             if coupon.used_by.count() >= coupon.max_limit_usage:
@@ -77,12 +89,12 @@ class ValidateCouponView(HasCustomerPermission, LoginRequiredMixin, View):
             if coupon.expiered_date and coupon.expiered_date <= timezone.now():
                 status_code, message = 403, "کد تخفیف منقضی شده است"
             
-            if user in  coupon.used_by.exists():
+            if user in  coupon.used_by.all():
                 status_code, message = 403, "کد تخفیف توسط شما استفاده شده است"
             
             else:
                 cart = CartModel.objects.get(user=self.request.user)
-                total_price = cart.calcolate_total_price()
+                total_price = cart.calculate_total_price()
                 total_price = total_price - round( total_price * (coupon.discount_percent / 100))
 
         return JsonResponse(
