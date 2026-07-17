@@ -5,6 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from .permissions import HasCustomerPermission
 from django.utils import timezone
 from django.http import JsonResponse
+from decimal import Decimal
 from .forms import CheckoutForm
 from cart.models import CartModel, CartItemModel
 from .models import OrderModel, OrderItemModel, CouponModel
@@ -38,9 +39,7 @@ class CheckoutView(HasCustomerPermission, LoginRequiredMixin, FormView):
         order_obj.total_price = order_obj.calculate_total_price()
         coupon = form.cleaned_data.get("coupon")
         if coupon:
-            discount_amount = round(
-            order_obj.total_price * (coupon.discount_percent / 100)
-            )
+            discount_amount = (order_obj.total_price * Decimal(coupon.discount_percent / Decimal("100")))
             
             order_obj.total_price -= discount_amount
             order_obj.coupon = coupon
@@ -89,7 +88,7 @@ class ValidateCouponView(HasCustomerPermission, LoginRequiredMixin, View):
             if coupon.expiered_date and coupon.expiered_date <= timezone.now():
                 status_code, message = 403, "کد تخفیف منقضی شده است"
             
-            if user in  coupon.used_by.all():
+            if user in coupon.used_by.all():
                 status_code, message = 403, "کد تخفیف توسط شما استفاده شده است"
             
             else:

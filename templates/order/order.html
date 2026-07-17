@@ -32,35 +32,37 @@
             <div class="form-row">
               <div class="form-field">
                 <label>نام گیرنده</label>
-                <input type="text" name="fullname" placeholder="نام و نام خانوادگی">
+                <input type="text" name="fullname" placeholder="نام و نام خانوادگی" required>
               </div>
               <div class="form-field">
                 <label>شماره موبایل</label>
-                <input type="tel" name="phone_number" placeholder="۰۹xxxxxxxxx">
+                <input type="tel" name="phone_number" placeholder="۰۹xxxxxxxxx" required>
               </div>
             </div>
 
             <div class="form-field">
               <div class="form-field">
                 <label>استان</label>
-                <input type="text" name="state" placeholder="نام استان">
+                <input type="text" name="state" placeholder="نام استان" required>
               </div>
             </div>
             <div class="form-row">
               <div class="form-field">
                 <label>شهر</label>
-                <input type="text" name="city" placeholder="نام شهر">
+                <input type="text" name="city" placeholder="نام شهر" required>
               </div>
               <div class="form-field">
                 <label>کد پستی</label>
-                <input type="text" name="zip_code" placeholder="۱۰ رقمی">
+                <input type="text" name="zip_code" placeholder="۱۰ رقمی" required>
               </div>
             </div>
 
             <div class="form-field">
               <label>آدرس کامل</label>
-              <textarea name="address" rows="3" placeholder="خیابان، کوچه، پلاک، واحد..."></textarea>
+              <textarea name="address" rows="3" placeholder="خیابان، کوچه، پلاک، واحد..." required></textarea>
             </div>
+
+            <input type="hidden" name="coupon" id="coupon-hidden">
 
           </fieldset>
         </form>
@@ -102,7 +104,6 @@
           </svg>
         </button>
 
-        </form>
       </div>
       <!-- /FORM -->
 
@@ -138,7 +139,6 @@
 <script>
   function ApplyDiscount(total_price, total_tax, final_price) {
     $("#total_price").html(total_price);
-    $("#final_price").html(final_price);
 
     formatPriceInToman(document.getElementById("total_price"))
     formatPriceInToman(document.getElementById("final_price"))
@@ -155,10 +155,12 @@
       success: function (response) {
         console.log(response);
         alert(response.message);
+        $("#coupon-hidden").val($("#coupon").val());
         ApplyDiscount(response.total_price, response.final_price);
       },
       error: function (xhr, status, error) {
         console.error(error);
+        $("#coupon-hidden").val("");
       }
     });
   }

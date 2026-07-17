@@ -33,7 +33,7 @@ class CheckoutForm(forms.ModelForm):
             if coupon.expiered_date <= timezone.now():
                 raise forms.ValidationError("کد تخفیف منقضی شده است")
             
-            if user in coupon.used_by:
+            if user in coupon.used_by.all():
                 raise forms.ValidationError("این کد تخفیف توسط شما استفاده شده است")
         
         return coupon
