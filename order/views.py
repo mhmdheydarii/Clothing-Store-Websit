@@ -13,7 +13,7 @@ from cart.cart import CartSession
 # Create your views here.
 
 class CheckoutView(HasCustomerPermission, LoginRequiredMixin, FormView):
-    template_name = "order/order.html"
+    template_name = "order/checkout.html"
     form_class = CheckoutForm
     success_url = reverse_lazy("order:success")
 
@@ -59,10 +59,10 @@ class CheckoutView(HasCustomerPermission, LoginRequiredMixin, FormView):
         context["total_price"] = total_price
         return context
 
-class SuccessView(TemplateView):
+class SuccessView(HasCustomerPermission, LoginRequiredMixin,TemplateView):
     template_name = "order/success.html"
 
-class FailedView(TemplateView):
+class FailedView(HasCustomerPermission, LoginRequiredMixin,TemplateView):
     template_name = "order/failed.html"
 
 
