@@ -137,11 +137,10 @@
   </div>
 </section>
 <script>
-  function ApplyDiscount(total_price, total_tax, final_price) {
+  function ApplyDiscount(total_price) {
     $("#total_price").html(total_price);
 
     formatPriceInToman(document.getElementById("total_price"))
-    formatPriceInToman(document.getElementById("final_price"))
   }
 
   function ValidateCoupon() {

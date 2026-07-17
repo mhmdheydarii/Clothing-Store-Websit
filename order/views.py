@@ -39,7 +39,7 @@ class CheckoutView(HasCustomerPermission, LoginRequiredMixin, FormView):
         order_obj.total_price = order_obj.calculate_total_price()
         coupon = form.cleaned_data.get("coupon")
         if coupon:
-            discount_amount = (order_obj.total_price * Decimal(coupon.discount_percent / Decimal("100")))
+            discount_amount = (order_obj.total_price * Decimal(coupon.discount_percent) / Decimal("100"))
             
             order_obj.total_price -= discount_amount
             order_obj.coupon = coupon
@@ -94,7 +94,7 @@ class ValidateCouponView(HasCustomerPermission, LoginRequiredMixin, View):
             else:
                 cart = CartModel.objects.get(user=self.request.user)
                 total_price = cart.calculate_total_price()
-                total_price = total_price - round( total_price * (coupon.discount_percent / 100))
+                total_price = total_price - (total_price * Decimal(coupon.discount_percent) / Decimal("100"))
 
         return JsonResponse(
             {
