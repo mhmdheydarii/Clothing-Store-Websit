@@ -4,7 +4,7 @@ from django.utils import timezone
 from accounts.models import User
 from shop.models import ProductVariant
 from accounts.validators import validate_iranian_cellphone_number
-
+from payment.models import PaymentModel
 # Create your models here.
 
 class CouponModel(models.Model):
@@ -42,6 +42,7 @@ class OrderModel(models.Model):
 
     total_price = models.DecimalField(default=0, max_digits=10, decimal_places=0)
     coupon = models.ForeignKey(CouponModel, on_delete=models.PROTECT, null=True, blank=True)
+    payment = models.ForeignKey(PaymentModel, on_delete=models.SET_NULL, null=True, blank=True)
     
     status = models.CharField(max_length=50, choices=OrderStatusTypeModel.choices, default=OrderStatusTypeModel.PENDING)
     updated_date = models.DateTimeField(auto_now=True)

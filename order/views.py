@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import TemplateView, FormView, View
+from django.views.generic import TemplateView, FormView, View, ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import redirect
 from .permissions import HasCustomerPermission
 from django.utils import timezone
 from django.http import JsonResponse
@@ -10,6 +11,8 @@ from .forms import CheckoutForm
 from cart.models import CartModel, CartItemModel
 from .models import OrderModel, OrderItemModel, CouponModel
 from cart.cart import CartSession
+from payment.models import PaymentModel
+from payment.zarinpal import ZarinPalSandbox
 # Create your views here.
 
 class CheckoutView(HasCustomerPermission, LoginRequiredMixin, FormView):
@@ -48,9 +51,25 @@ class CheckoutView(HasCustomerPermission, LoginRequiredMixin, FormView):
             coupon.save()
 
         order_obj.save()
-        cart.cart_items.all().delete()
-        CartSession(self.request.session).clear()
-        return super().form_valid(form)
+        return redirect(self.create_payment_url(order_obj))
+    
+    def create_payment_url(self, order):
+        zarinpal = ZarinPalSandbox()
+        response = zarinpal.payment_request(order.total_price)
+
+        authority = response.get("data", {}).get("authority")
+        if not authority:
+            error_msg = response.get("errors", {}).get("message", "خطای ناشناخته")
+            # یا redirect به صفحه خطا یا raise
+            raise Exception(f"خطا از زرین‌پال: {error_msg}")
+        
+        payment_obj = PaymentModel.objects.create(
+            authority_id=authority,
+            amount=order.total_price
+        )
+        order.payment = payment_obj
+        order.save()
+        return zarinpal.generate_payment_url(authority)
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -59,9 +78,10 @@ class CheckoutView(HasCustomerPermission, LoginRequiredMixin, FormView):
         context["total_price"] = total_price
         return context
 
-class SuccessView(HasCustomerPermission, LoginRequiredMixin,TemplateView):
+class SuccessView(HasCustomerPermission, LoginRequiredMixin,ListView):
     template_name = "order/success.html"
 
+    
 class FailedView(HasCustomerPermission, LoginRequiredMixin,TemplateView):
     template_name = "order/failed.html"
 
