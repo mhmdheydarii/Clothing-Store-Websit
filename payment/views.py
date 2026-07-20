@@ -14,24 +14,37 @@ class PaymentVerifyView(View):
 
     def get(self, request, *args, **kwargs):
         authority_id = request.GET.get("Authority")
+        status = request.GET.get("Status")
         payment_obj = get_object_or_404(PaymentModel, authority_id=authority_id)
-        order = OrderModel.objects.get(payment=payment_obj)
+        order = get_object_or_404(OrderModel, payment=payment_obj)
+
+        if status != "OK":
+            payment_obj.status = PaymentModel.PaymentStatusType.CANCELED
+            payment_obj.save(update_fields=["status"])
+
+            order.status = OrderModel.OrderStatusTypeModel.CANCELED
+            order.save(update_fields=["status"])
+
+            return render(request, "order/failed.html")
+        if payment_obj.status == payment_obj.PaymentStatusType.PAID:
+                return render(request, "order/success.html")
+        
         zarinpal = ZarinPalSandbox()
         response = zarinpal.payment_verify(int(payment_obj.amount), authority_id)
 
         data = response.get("data",{})
 
+        
         if data.get("code") in [100, 101]:
 
-            if payment_obj.status == payment_obj.PaymentStatusType.PAID:
-                return render(request, "order/success.html")
+            
             
             with transaction.atomic():
 
                 for item in order.order_items.all():
 
                     product = ProductVariant.objects.select_for_update().get(
-                        id=item.product_variant.id
+                        id=item.product_variant_id
                     )
 
                     if product.stock < item.quantity:
@@ -48,6 +61,8 @@ class PaymentVerifyView(View):
 
             order.status = order.OrderStatusTypeModel.PAID
             order.save()
+            if order.coupon:
+                order.coupon.used_by.add(order.user)
             cart = CartModel.objects.get(user=order.user)
             cart.cart_items.all().delete()
             CartSession(request.session).clear()

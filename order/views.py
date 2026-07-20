@@ -47,9 +47,6 @@ class CheckoutView(HasCustomerPermission, LoginRequiredMixin, FormView):
             order_obj.total_price -= discount_amount
             order_obj.coupon = coupon
 
-            coupon.used_by.add(user)
-            coupon.save()
-
         order_obj.save()
         return redirect(self.create_payment_url(order_obj))
     
