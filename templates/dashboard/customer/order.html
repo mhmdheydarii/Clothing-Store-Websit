@@ -20,8 +20,8 @@
       <div class="dash-card order-card">
         <div class="order-card-top">
           <div>
-            <span class="order-number">سفارش #{{ order.order_number }}</span>
-            <span class="order-date">{{ order.paid_at|date:"Y/m/d - H:i" }}</span>
+            <span class="order-number">سفارش #{{ order. }}</span>
+            <span class="order-date">{{ order.created_date|date:"Y/m/d - H:i" }}</span>
           </div>
           <span class="badge {% if order.status == 'paid' %}badge-success{% endif %}">
             {% if order.status == 'paid' %}پرداخت شده{% else %}{{ order.get_status_display }}{% endif %}
@@ -29,16 +29,13 @@
         </div>
 
         <div class="order-items-preview">
-          {% for item in order.items.all|slice:":3" %}
-            <span class="order-item-chip">{{ item.product.name }} × {{ item.quantity }}</span>
+          {% for item in order.order_items.all|slice:":3" %}
+            <span class="order-item-chip">{{ item.product_variant.product.name }} × {{ item.quantity }}</span>
           {% endfor %}
-          {% if order.items.count > 3 %}
-            <span class="order-item-chip more">+{{ order.items.count|add:"-3" }} مورد دیگر</span>
-          {% endif %}
         </div>
 
         <div class="order-card-bottom">
-          <span class="order-total">{{ order.total_price|floatformat:0 }} تومان</span>
+          <span class="order-total formatted-price">{{ order.total_price}} تومان</span>
           <a href="#" class="btn-outline">مشاهده جزئیات</a>
         </div>
       </div>

@@ -19,14 +19,6 @@
       پروفایل کاربری
     </a>
 
-    <a href="{% url 'dashboard:customer:address' %}"
-       class="dash-nav-link {% if request.resolver_match.url_name == 'address' %}active{% endif %}">
-      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M12 21s-7-6.1-7-11a7 7 0 0 1 14 0c0 4.9-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/>
-      </svg>
-      آدرس‌های من
-    </a>
-
     <a href="{% url 'dashboard:customer:order' %}"
        class="dash-nav-link {% if request.resolver_match.url_name == 'order' %}active{% endif %}">
       <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
