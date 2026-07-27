@@ -9,4 +9,7 @@ class BlogPostsListView(ListView):
 
     template_name = "blog/blog.html"
     queryset = BlogModel.objects.filter(status=BlogModel.BlogStatusType.PUBLISHED)
-    paginate_by = 2
+    paginate_by = 9
+
+class BlogPostDetailView(TemplateView):
+    pass

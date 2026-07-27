@@ -4,6 +4,7 @@ from django.db import models
 
 class BlogModel(models.Model):
     title = models.CharField(max_length=255)
+    slug = models.SlugField(allow_unicode=True, unique=True, null=True)
     brief_description = models.CharField(max_length=500)
     description = models.TextField()
     image = models.ImageField(upload_to="blog/images")

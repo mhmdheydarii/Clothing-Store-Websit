@@ -24,20 +24,15 @@
     {% for object in object_list %}
       <a class="blog-card" href="blog-post.html">
 
-        <!-- عکس پست از بک‌اند -->
         <img src="{{object.image.url}}" alt="عنوان مقاله" loading="lazy">
 
         <div class="blog-card-body">
-          <!-- تگ/دسته از بک‌اند -->
           <span class="blog-tag">{{object.tag}}</span>
 
-          <!-- عنوان از بک‌اند -->
           <h3>{{object.title}}</h3>
 
-          <!-- خلاصه از بک‌اند -->
           <p>{{object.brief_description}}</p>
 
-          <!-- تاریخ از بک‌اند -->
           <span class="blog-meta">{{object.created_date|date:'M d'}}</span>
         </div>
 
@@ -49,7 +44,6 @@
     {% endfor %}
     </div>
     
-    <!-- PAGINATION — اینجا if بزن روی posts.has_other_pages -->
     {% if page_obj.has_other_pages %}
     <div class="pagination" style="display:flex; justify-content:center; gap:8px; margin-top:50px;">
       {% if page_obj.has_previous %}
