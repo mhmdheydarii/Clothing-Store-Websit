@@ -18,16 +18,14 @@
 <section class="blog-section">
 
   <div class="container">
-  
-    {% for object in object_list %}
+    
     <div class="blog-grid">
 
-      <!-- یه کارت نمونه — داخل for تکرار میشه -->
+    {% for object in object_list %}
       <a class="blog-card" href="blog-post.html">
 
         <!-- عکس پست از بک‌اند -->
-        <img src="{{object.image.url}}"
-             alt="عنوان مقاله" loading="lazy">
+        <img src="{{object.image.url}}" alt="عنوان مقاله" loading="lazy">
 
         <div class="blog-card-body">
           <!-- تگ/دسته از بک‌اند -->
@@ -37,28 +35,38 @@
           <h3>{{object.title}}</h3>
 
           <!-- خلاصه از بک‌اند -->
-          <p>{{object.brif_description}}</p>
+          <p>{{object.brief_description}}</p>
 
           <!-- تاریخ از بک‌اند -->
-          <span class="blog-meta">{{object.created_date}}</span>
+          <span class="blog-meta">{{object.created_date|date:'M d'}}</span>
         </div>
 
       </a>
-      <!-- /کارت نمونه -->
-
-    </div>
     {% empty %}
-      <p style="grid-column:1/-1; text-align:center; color:#8a8275; padding:60px 0;">
-        درحال حاضر پستی برای نمایش وجود ندارد.
-      </p>
+        <p style="grid-column:1/-1; text-align:center; color:#8a8275; padding:60px 0;">
+          درحال حاضر پستی برای نمایش وجود ندارد.
+        </p>
     {% endfor %}
-    <!-- PAGINATION — اینجا if بزن روی posts.has_other_pages -->
-    <div class="pagination" style="display:flex; justify-content:center; gap:8px; margin-top:50px;">
-      <a href="?page=1" class="chip">قبلی</a>
-      <a href="?page=1" class="chip active">۱</a>
-      <a href="?page=2" class="chip">۲</a>
-      <a href="?page=2" class="chip">بعدی</a>
     </div>
+    
+    <!-- PAGINATION — اینجا if بزن روی posts.has_other_pages -->
+    {% if page_obj.has_other_pages %}
+    <div class="pagination" style="display:flex; justify-content:center; gap:8px; margin-top:50px;">
+      {% if page_obj.has_previous %}
+      <button class="chip" onclick="changePage(`{{page_obj.previous_page_number}}`)">قبلی</button>
+      {% endif %}
+      {% for i in page_obj.paginator.page_range %}
+      {% if i == page_obj.number %}
+      <button class="chip active" onclick="changePage(`{{i}}`)">{{i}}</button>
+      {% else %}
+      <button class="chip" onclick="changePage(`{{i}}`)">{{i}}</button>
+      {% endif %}
+      {% endfor %}
+      {% if page_obj.has_next %}
+      <button class="chip" onclick="changePage(`{{page_obj.next_page_number}}`)">بعدی</button>
+      {% endif %}
+    </div>
+    {% endif %}
 
   </div>
 </section>
