@@ -14,7 +14,7 @@ class PaymentModel(models.Model):
         PAID = "paid", "پرداخت شده"
         CANCELED = "canceled", "لغو شده"
 
-    status = models.CharField(choices=PaymentStatusType.choices, default=PaymentStatusType.PENDING.value)
+    status = models.CharField(choices=PaymentStatusType.choices, default=PaymentStatusType.PENDING.value, max_length=200)
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
 

@@ -57,8 +57,7 @@ class CheckoutView(HasCustomerPermission, LoginRequiredMixin, FormView):
         authority = response.get("data", {}).get("authority")
         if not authority:
             error_msg = response.get("errors", {}).get("message", "خطای ناشناخته")
-            # یا redirect به صفحه خطا یا raise
-            raise Exception(f"خطا از زرین‌پال: {error_msg}")
+            return redirect("order:checkout")
         
         payment_obj = PaymentModel.objects.create(
             authority_id=authority,
@@ -99,13 +98,13 @@ class ValidateCouponView(HasCustomerPermission, LoginRequiredMixin, View):
             return JsonResponse({"message":"کد تخفیف وجود ندارد"}, status=404)
         
         else:
-            if coupon.used_by.count() >= coupon.max_limit_usage:
+            if coupon.used_by.count() > coupon.max_limit_usage:
                 status_code, message = 403, "کد تخفیف به اتمام رسیده است"
             
             if coupon.expiered_date and coupon.expiered_date <= timezone.now():
                 status_code, message = 403, "کد تخفیف منقضی شده است"
             
-            if user in coupon.used_by.all():
+            if user in coupon.used_by.filter(id=user.id):
                 status_code, message = 403, "کد تخفیف توسط شما استفاده شده است"
             
             else:

@@ -35,9 +35,7 @@ class PaymentVerifyView(View):
         data = response.get("data",{})
 
         
-        if data.get("code") in [100, 101]:
-
-            
+        if data.get("code") == "100":       
             
             with transaction.atomic():
 

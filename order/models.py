@@ -69,7 +69,7 @@ class OrderItemModel(models.Model):
     updated_date = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.product_variant.product.name
+        return self.order.user
 
     class Meta:
         ordering = ["-created_date"]
