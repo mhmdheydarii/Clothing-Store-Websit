@@ -30,7 +30,7 @@
           href="{% url 'website:index' %}">خانه</a>
         <a class="nav-link {% if request.resolver_match.view_name == 'shop:products' %} active-link {% endif %}"
           href="{% url 'shop:products' %}">پیراهن‌ها</a>
-        <a href="blog.html" class="nav-link">وبلاگ</a>
+        <a href="{% url 'blog:post-list' %}" class="nav-link">وبلاگ</a>
         <a class="nav-link {% if request.resolver_match.view_name == 'website:about' %} active-link {% endif %}"
           href="{% url 'website:about' %}">درباره ما</a>
         <a class="nav-link {% if request.resolver_match.view_name == 'website:contact' %} active-link {% endif %}"
