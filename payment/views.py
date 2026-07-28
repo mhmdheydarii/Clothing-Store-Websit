@@ -21,11 +21,10 @@ class PaymentVerifyView(View):
         if status != "OK":
             payment_obj.status = PaymentModel.PaymentStatusType.CANCELED
             payment_obj.save(update_fields=["status"])
-
             order.status = OrderModel.OrderStatusTypeModel.CANCELED
             order.save(update_fields=["status"])
-
             return render(request, "order/failed.html")
+        
         if payment_obj.status == payment_obj.PaymentStatusType.PAID:
                 return render(request, "order/success.html")
         
@@ -33,9 +32,8 @@ class PaymentVerifyView(View):
         response = zarinpal.payment_verify(int(payment_obj.amount), authority_id)
 
         data = response.get("data",{})
-
         
-        if data.get("code") == "100":       
+        if data.get("code") == 100 :       
             
             with transaction.atomic():
 
@@ -56,9 +54,9 @@ class PaymentVerifyView(View):
             payment_obj.status = payment_obj.PaymentStatusType.PAID
             payment_obj.response_json = response
             payment_obj.save()
-
             order.status = order.OrderStatusTypeModel.PAID
             order.save()
+
             if order.coupon:
                 order.coupon.used_by.add(order.user)
             cart = CartModel.objects.get(user=order.user)

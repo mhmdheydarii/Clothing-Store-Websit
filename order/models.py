@@ -69,7 +69,7 @@ class OrderItemModel(models.Model):
     updated_date = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.order.user
+        return self.order.user.email
 
     class Meta:
         ordering = ["-created_date"]
