@@ -1,77 +1,36 @@
 {% extends 'base.html' %}
 {% load static %}
-
+{% load blog_tags %}
 {% block content %}
 <!-- ARTICLE -->
 <section class="article">
   <div class="container">
 
     <div class="breadcrumb" style="text-align:center; margin-bottom:20px;">
-      <a href="index.html">خانه</a> /
-      <a href="blog.html">وبلاگ</a> /
-      <!-- عنوان پست از بک‌اند -->
-      عنوان مقاله
+      <a href="{% url 'website:index' %}">خانه</a> /
+      <a href="{% url 'blog:post-list' %}">وبلاگ</a> /
+     {{ object.title }}
     </div>
 
     <!-- HEAD -->
     <div class="article-head">
-      <!-- تگ و تاریخ از بک‌اند -->
-      <span class="blog-tag">راهنمای سایز · ۱۴۰۴/۰۲/۱۲</span>
+      <span class="blog-tag">{{object.tag}}  · {{object.created_date|date:'M d / h:m'}}</span>
 
-      <!-- عنوان از بک‌اند -->
-      <h1>عنوان کامل مقاله اینجا نمایش داده می‌شود</h1>
+      <h1>{{object.brief_description}}</h1>
     </div>
 
     <!-- COVER IMAGE -->
     <div class="article-cover">
-      <!-- عکس کاور از بک‌اند -->
-      <img src="https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?q=80&w=1200&auto=format&fit=crop"
-           alt="عنوان مقاله">
+      <img src="{{object.image.url}}"
+           alt="{{object.title}}">
     </div>
 
     <!-- BODY -->
     <div class="article-body">
-      <!-- محتوای مقاله از بک‌اند — اینجا متغیر body یا content رو بذار -->
-      <p>محتوای کامل مقاله اینجا نمایش داده می‌شود.</p>
-
-      <h2>یک تیتر نمونه</h2>
-      <p>متن زیر تیتر اینجا قرار می‌گیرد.</p>
-
-      <ul>
-        <li>آیتم اول</li>
-        <li>آیتم دوم</li>
-        <li>آیتم سوم</li>
-      </ul>
-
-      <table>
-        <tr><th>سایز</th><th>دور یقه</th><th>دور سینه</th></tr>
-        <tr><td>S</td><td>۳۸-۳۹</td><td>۹۲-۹۶</td></tr>
-        <tr><td>M</td><td>۴۰-۴۱</td><td>۹۷-۱۰۱</td></tr>
-      </table>
+      <p>{{object.description}}</p>
     </div>
 
-    <!-- MORE ARTICLES -->
-    <div style="max-width:920px; margin:70px auto 0;">
-      <h2 class="related-heading">مقالات دیگر</h2>
-
-      <!-- اینجا for بزن روی related_posts -->
-      <div class="blog-grid">
-
-        <!-- یه کارت نمونه — داخل for تکرار میشه -->
-        <a class="blog-card" href="blog-post.html">
-          <img src="https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?q=80&w=900&auto=format&fit=crop"
-               alt="عنوان مقاله" loading="lazy">
-          <div class="blog-card-body">
-            <span class="blog-tag">راهنمای خرید</span>
-            <h3>عنوان مقالهٔ مرتبط</h3>
-            <p>خلاصهٔ مقاله اینجا نمایش داده می‌شود.</p>
-            <span class="blog-meta">۱۴۰۴/۰۱/۲۸</span>
-          </div>
-        </a>
-        <!-- /کارت نمونه -->
-
-      </div>
-    </div>
+    {% show_similar_posts object %}
 
   </div>
 </section>

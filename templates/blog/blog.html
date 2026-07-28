@@ -22,7 +22,7 @@
     <div class="blog-grid">
 
     {% for object in object_list %}
-      <a class="blog-card" href="blog-post.html">
+      <a class="blog-card" href="{% url 'blog:post-detail' slug=object.slug %}">
 
         <img src="{{object.image.url}}" alt="عنوان مقاله" loading="lazy">
 

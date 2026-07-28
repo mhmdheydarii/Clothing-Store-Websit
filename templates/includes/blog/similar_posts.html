@@ -1,0 +1,23 @@
+{% load static %}
+
+<!-- MORE ARTICLES -->
+<div style="max-width:920px; margin:70px auto 0;">
+    <h2 class="related-heading">مقالات دیگر</h2>
+    
+    {% for post in similar_posts %}
+    <div class="blog-grid">
+
+        <a class="blog-card" href="{% url 'blog:post-detail' slug=post.slug %}">
+            <img src="{{post.image.url}}"
+                alt="{{post.title}}" loading="lazy">
+            <div class="blog-card-body">
+                <span class="blog-tag">{{post.tag}}</span>
+                <h3>{{post.title}}</h3>
+                <p>{{post.brief_description}}</p>
+                <span class="blog-meta">{{post.created_date|date:"M d / h:m"}}</span>
+            </div>
+        </a>
+
+    </div>
+    {% endfor %}
+</div>
