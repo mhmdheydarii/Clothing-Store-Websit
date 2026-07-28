@@ -107,14 +107,14 @@
       <div class="footer-col">
         <h4>فروشگاه</h4>
         <a href="{% url 'shop:products' %}">همهٔ پیراهن‌ها</a>
-        <a href="blog.html">وبلاگ</a>
+        <a href="{% url 'blog:post-list' %}">وبلاگ</a>
         <a href="{% url 'website:about' %}">درباره ما</a>
       </div>
       <div class="footer-col">
         <h4>حساب کاربری</h4>
         <a href="{% url 'accounts:login' %}">ورود</a>
         <a href="{% url 'accounts:register' %}">ثبت‌نام</a>
-        <a href="account.html">سفارش‌های من</a>
+        <a href="{% url 'dashboard:customer:order' %}">سفارش‌های من</a>
       </div>
       <div class="footer-col">
         <h4>ارتباط با ما</h4>
