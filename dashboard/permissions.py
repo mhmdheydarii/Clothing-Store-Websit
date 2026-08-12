@@ -6,11 +6,10 @@ class UserAdminPermission(UserPassesTestMixin):
     
     def test_func(self):
         if self.request.user.is_authenticated:
-            return self.request.user.type == UserType.admin.value or UserType.superuser.value
+            return self.request.user.type in (UserType.admin.value, UserType.superuser.value)
         
 class UserCustomerPermission(UserPassesTestMixin):
 
     def test_func(self):
         if self.request.user.is_authenticated:
-
             return self.request.user.type == UserType.customer.value
