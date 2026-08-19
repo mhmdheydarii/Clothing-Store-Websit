@@ -4,7 +4,7 @@
 {% block content %}
 <section class="page-header">
   <div class="container">
-    <div class="breadcrumb"><a href="index.html">خانه</a> / تماس با ما</div>
+    <div class="breadcrumb"><a href="{% url 'website:index' %}">خانه</a> / تماس با ما</div>
     <h1>تماس با ما</h1>
     <p>سؤالی دارید؟ خوشحال می‌شویم کمکتان کنیم.</p>
   </div>
@@ -24,7 +24,7 @@
       <div><h4>آدرس کارگاه</h4><p>تهران، خیابان ولیعصر، نرسیده به میدان ونک</p></div>
     </div>
     <div class="map-box">
-      <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=900&auto=format&fit=crop" alt="نقشهٔ موقعیت پیراهن‌کده">
+      <img src="{% static 'img/contact-page/map.jpg' %}" alt="نقشهٔ موقعیت پیراهن‌کده">
     </div>
   </div>
   <div class="auth-card" style="margin:0;">

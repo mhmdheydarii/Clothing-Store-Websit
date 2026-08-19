@@ -4,7 +4,7 @@
 {% block content %}
 <section class="page-header">
   <div class="container">
-    <div class="breadcrumb"><a href="index.html">خانه</a> / درباره ما</div>
+    <div class="breadcrumb"><a href="{% url 'website:index' %}">خانه</a> / درباره ما</div>
     <h1>دربارهٔ پیراهن‌کده</h1>
     <p>از یک میز خیاطی کوچک، تا اتاق لباس شما.</p>
   </div>
@@ -12,7 +12,7 @@
 <section class="about-section">
   <div class="container about-grid">
     <div class="about-media">
-      <img src="https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?q=80&w=900&auto=format&fit=crop" alt="خیاط در حال دوخت پیراهن" loading="lazy">
+      <img src="{% static 'img/about-page/tailor.jpg' %}" alt="خیاط در حال دوخت پیراهن" loading="lazy">
     </div>
     <div class="about-text">
       <span class="eyebrow">داستان ما</span>
