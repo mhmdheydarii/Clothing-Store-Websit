@@ -3,7 +3,7 @@
   
 
   <p align="center">
-  <img src="./docs/clothing-store.png" width="700"/>
+  <img src="./doc/clothing-store.png" width="700"/>
   </p>
 </section>
 
