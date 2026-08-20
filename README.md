@@ -50,7 +50,7 @@
 <h3>1. Clone the repository</h3>
 
 ```bash
-git clone https://github.com/mhmdheydarii/Clothing-Store-Websit.git
+git clone https://github.com/mhmdheydarii/Clothing-Store-Website.git
 ```
 
 <br>
