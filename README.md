@@ -58,7 +58,7 @@ git clone https://github.com/mhmdheydarii/Clothing-Store-Website.git
 <h3>2. Navigate to the project directory</h3>
 
 ```bash
-cd Clothing-Store-Websit
+cd Clothing-Store-Website
 ```
 
 <br>
