@@ -111,6 +111,7 @@
     <form action="{% url 'website:newsletter' %}" method="post" class="newsletter-form">
       {% csrf_token %}
       <input type="email" required placeholder="ایمیل شما" name="email">
+      
       <button type="submit">عضویت</button>
     </form>
   </div>

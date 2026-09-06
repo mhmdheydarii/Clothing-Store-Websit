@@ -49,6 +49,8 @@ INSTALLED_APPS = [
     'order',
     'payment',
     'blog',
+
+    "captcha", 
 ]
 
 MIDDLEWARE = [
